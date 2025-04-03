@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CarAppClassTrip;
-using CarAppClassCar;
 
 
-namespace CarAppUpd
+namespace CarApp
 {
     public class Test
     {
@@ -19,7 +17,7 @@ namespace CarAppUpd
             int odometer;
             double kmPerLiter;
             double distance;
-            double prisPerLiter;
+            double literPrice;
             GearType geartype;
             FuelType fuelType;
             DateTime tripDate = DateTime.Now.Date;
@@ -38,7 +36,33 @@ namespace CarAppUpd
             Console.WriteLine("Angiv kmPerLiter: ");
             kmPerLiter = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine("Angiv brændstoftype: ");
-            fuelType = Enum.Parse<FuelType>(Console.ReadLine());
+            fuelType = Enum.Parse<FuelType>(Console.ReadLine().Substring(0).ToUpper());
+            
+            //Hvordan gør man at indtaste med LOWER eller UPPER case ??
+
+            //skal man laver en switch? hvor man tager den individuelle svar og kører den til at være to UPPER eller LOWER ?
+            
+            // string fuel = Console.ReadLine().ToLower();   
+            //if (fuel == "benzin")
+            //{
+            //  fuelType = FuelType.Benzin;
+            //}
+            //else if (fuel == "diesel")
+            //{
+            //    fuelType = FuelType.Diesel;
+            //}
+            //else if (fuel == "hybrid")
+            //{
+            //    fuelType = FuelType.Hybrid;
+            //}
+            //else if (fuel == "elektrisk")
+            //{
+            //    fuelType = FuelType.Elektrisk;
+            //}
+
+
+
+
             Console.WriteLine("Angiv gear type: ");
             geartype = Enum.Parse<GearType>(Console.ReadLine());
 
@@ -56,7 +80,7 @@ namespace CarAppUpd
 
 
 
-            bil1.Drive(true, distance);             // Drive metoden
+            bil1.Drive();             // Drive metoden
 
 
             List<Trip> trips = new List<Trip>();
@@ -70,9 +94,9 @@ namespace CarAppUpd
             bil1.Drive(newTrip);  
 
             Console.WriteLine("Angiv brændstofpris i kr: ");
-            prisPerLiter = Convert.ToDouble(Console.ReadLine());
+            literPrice = Convert.ToDouble(Console.ReadLine());
 
-            newTrip.CalculateTripPrice(distance, prisPerLiter);        //Calculate Trip Price
+            newTrip.CalculateTripPrice(distance, literPrice);        //metoden er fra Trip Klassen
 
             bil1.PrintCarDetails();      //Udskriv bilens oplysninger i konsollen
 

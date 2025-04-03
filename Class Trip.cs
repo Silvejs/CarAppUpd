@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 
 
-namespace CarAppClassTrip
+namespace CarApp
 {
     public class Trip
     {
@@ -92,14 +92,14 @@ namespace CarAppClassTrip
 
         public TimeSpan TripDuration()         //metode for afregning af turens varighed
         {
-            return _endTime - _startTime;
+            return EndTime - StartTime;
         }
 
 
 
         public double CalculateFuelUsed(double kmPerLiter)          //metode for afregning af brugt mængde brændstoff under turen 
         {
-            double tripFuelUsed = _distance / kmPerLiter;
+            double tripFuelUsed = Distance / kmPerLiter;
             return tripFuelUsed;
         }
 
@@ -108,12 +108,12 @@ namespace CarAppClassTrip
         public double CalculateTripPrice(double literPrice, double kmPerLiter)      //metode for afregning af turens omkostning
         {
 
-            return (_distance / kmPerLiter) * literPrice;
+            return (Distance / kmPerLiter) * literPrice;
         }
 
         public void PrintTripDetails()      // metode for at printe alle turens detaljer
         {
-            Console.WriteLine("Køreturdetaljere; " + _distance.ToString() + " - " + _tripDate.ToString() + " - " + _startTime.ToString() + " - " + _endTime.ToString() + "-" + TripDuration());
+            Console.WriteLine("Køreturdetaljere; " + _distance.ToString() + " - " + TripDate.ToShortDateString() + " - " + StartTime.ToShortDateString() + " - " + EndTime.ToShortDateString());
         }
     }
 }
