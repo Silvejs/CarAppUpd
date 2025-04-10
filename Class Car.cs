@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CarAppClassTrip;
 using Microsoft.VisualBasic;
 
-namespace CarAppClassCar
+namespace CarApp
 {
 
 
@@ -23,6 +22,10 @@ namespace CarAppClassCar
         private FuelType _fuelType;
         private List<Trip> _trips;
         private GearType _gearType;
+        private double _kmPerLiter { get; set; }
+        private double _tripPrice { get; set; }
+
+
 
 
 
@@ -136,7 +139,7 @@ namespace CarAppClassCar
                 }
             }
         }
-
+        
         
 
        
@@ -173,14 +176,9 @@ namespace CarAppClassCar
 
         
 
-<<<<<<< Updated upstream
-            //Print Car Details i consollen -> nu med opdateret kilometer tal
-        public void PrintCarDetails()
-=======
 
         //Print Car Details i consollen -> nu med opdateret kilometer tal
         public string PrintCarDetails()
->>>>>>> Stashed changes
         {
 
             return $"Brand".PadRight(15) + "|" + "Model".PadRight(15) + "|" + "Year".PadRight(15) + "|" + "Mileage".PadRight(15) + "|" + "FuelConsumption".PadLeft(15)+
@@ -193,9 +191,7 @@ namespace CarAppClassCar
         }
 
 
-<<<<<<< Updated upstream
 
-=======
         public double CalculateFuelUsed()
         {
                 if (KmPerLiter <= 0)
@@ -209,7 +205,6 @@ namespace CarAppClassCar
                 return FuelUsed;
         }
         
->>>>>>> Stashed changes
 
 
         // Udregner prisen for en tur 
@@ -237,8 +232,6 @@ namespace CarAppClassCar
             //    Console.WriteLine(trip.PrintTripDetails());       //Skriv parametre som skal udskrives i consolen ift TRIP
             //}
         }
-<<<<<<< Updated upstream
-=======
 
 
         public void Drive1(Trip newTrip)
@@ -282,23 +275,28 @@ namespace CarAppClassCar
 
         }
 
+        static bool Palindrome(int num)
+        {
+            int originalNumber = num;
+            int remainder, reversedNumber = 0;
 
->>>>>>> Stashed changes
-        
+            while (num > 0)
+            {
+                remainder = num % 10;
+                reversedNumber = (reversedNumber * 10) + remainder;
+                num /= 10;
+            }
+
+            return originalNumber == reversedNumber;
+        }
+
     }
     public enum FuelType                    // enum for Fuel Type
     {
-<<<<<<< Updated upstream
-             Benzin,
-             Diesel,
-             Hybrid,
-             Elektrisk
-=======
              BENZIN,                        // find en løsning til at sætte alle bogstaver TO LOWER og den førstebogstav til TO UPPER...
              DIESEL,                        /* kræver at man tage indekset for første bogstaver som skal gøres TOUPPER ved udskrivning*/
              HYBRID,
              ELEKTRISK
->>>>>>> Stashed changes
     }
 
     public enum GearType                    // enum for Gear Type

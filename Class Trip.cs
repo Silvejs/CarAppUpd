@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 
 
-namespace CarAppClassTrip
+namespace CarApp
 {
     public class Trip
     {
@@ -14,6 +14,7 @@ namespace CarAppClassTrip
         private DateTime _tripDate;
         private DateTime _startTime;
         private DateTime _endTime;
+        private double _tripPrice;
 
 
         public double Distance             //GETTER SETTER FOR EACH PROPERTIES
@@ -107,17 +108,31 @@ namespace CarAppClassTrip
 
         public double CalculateTripPrice(double literPrice, double kmPerLiter)      //metode for afregning af turens omkostning
         {
+            try
+            {
+                if (kmPerLiter <= 0)
+                {
+                    throw new DivideByZeroException("Invalid indtastning");
+                }
+                    _tripPrice = (_distance / kmPerLiter) * literPrice;
+                    return _tripPrice;
+                
 
-            return (_distance / kmPerLiter) * literPrice;
+            }
+            catch (DivideByZeroException dpz)                                       /*Exception - Divide  By  Zero*/
+            {
+                Console.WriteLine("Den intastede værdi skal vær over null", dpz.Message);
+                return 
+            }
+            finally
+            {
+                Console.WriteLine("Turomkostning afregnet");
+            }
         }
 
         public string PrintTripDetails()      // metode for at printe alle turens detaljer
         {
-<<<<<<< Updated upstream
-            Console.WriteLine("Køreturdetaljere; " + _distance.ToString() + " - " + _tripDate.ToString() + " - " + _startTime.ToString() + " - " + _endTime.ToString() + "-" + TripDuration());
-=======
-            return $"Køreturdetaljere; " + _distance.ToString() + " - " + TripDate.ToShortDateString() + " - " + StartTime.ToShortDateString() + " - " + EndTime.ToShortDateString();
->>>>>>> Stashed changes
+            return $"Køreturdetaljere: " + _distance.ToString() + " - " + _tripDate.ToString() + " - " + _startTime.ToString() + " - " + _endTime.ToString() + "-" + TripDuration();
         }
     }
 }
