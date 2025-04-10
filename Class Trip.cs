@@ -10,14 +10,14 @@ namespace CarApp
 {
     public class Trip
     {
-        private double _distance;           //PRIVAT PROPERTIES
+        private double _distance;                                                           //PRIVAT PROPERTIES
         private DateTime _tripDate;
         private DateTime _startTime;
         private DateTime _endTime;
         private double _tripPrice;
 
 
-        public double Distance             //GETTER SETTER FOR EACH PROPERTIES
+        public double Distance                                                                  //GETTER SETTER FOR EACH PROPERTIES
         {
             get
             {
@@ -82,8 +82,12 @@ namespace CarApp
         }
         public double TripPrice { get { return _tripPrice; } set { _tripPrice = value; } }
 
-        //CONSTRUCTOR
-        public Trip(double distance, DateTime tripDate, DateTime startTime, DateTime endTime)
+
+        /*Metoder og Constructor*/
+
+
+       
+        public Trip(double distance, DateTime tripDate, DateTime startTime, DateTime endTime)           //CONSTRUCTOR
         {
             double Distance = distance;
             DateTime TripDate = tripDate;
@@ -92,22 +96,42 @@ namespace CarApp
         }
 
 
-        public TimeSpan TripDuration()         //metode for afregning af turens varighed
+        public TimeSpan TripDuration()                                                      //metode for afregning af turens varighed
         {
             return _endTime - _startTime;
         }
 
 
 
-        public double CalculateFuelUsed(double kmPerLiter)          //metode for afregning af brugt mængde brændstoff under turen 
+        public double CalculateFuelUsed(double kmPerLiter)                                   //metode for afregning af brugt mængde brændstoff under turen 
         {
-            double tripFuelUsed = _distance / kmPerLiter;
-            return tripFuelUsed;
+            try
+            {
+                if (kmPerLiter <= 0)
+                {
+                    throw new DivideByZeroException("Invalid indtastning");
+                }
+
+                double FuelUsed = _distance / kmPerLiter;
+                return FuelUsed;
+
+
+            }
+            catch (DivideByZeroException dpz)                                               /*Exception - Divide  By  Zero*/
+            {
+                Console.Write("Den intastede værdi skal være over null", dpz.Message);
+                return 0;                                                                   /* Programmet crasher hvis man ikke angive en "double" til at returnerer pga metodens datatype*/
+            }
+            finally
+            {
+                Console.WriteLine("Køretur forbrug afregnet");
+            }
+          
         }
 
 
 
-        public double CalculateTripPrice(double literPrice, double kmPerLiter)      //metode for afregning af turens omkostning
+        public double CalculateTripPrice(double literPrice, double kmPerLiter)              //metode for afregning af turens omkostning
         {
             try
             {
@@ -120,9 +144,9 @@ namespace CarApp
                 
 
             }
-            catch (DivideByZeroException dpz)                                       /*Exception - Divide  By  Zero*/
+            catch (DivideByZeroException dpz)                                                /*Exception - Divide  By  Zero*/
             {
-                Console.Write("Den intastede værdi skal vær over null", dpz.Message);
+                Console.Write("Den intastede værdi skal være over null", dpz.Message);
                 return 0;                                                                   /* Programmet crasher hvis man ikke angive en "double" til at returnerer pga metodens datatype*/
             }
             finally
@@ -131,7 +155,8 @@ namespace CarApp
             }
         }
 
-        public string PrintTripDetails()      // metode for at printe alle turens detaljer
+
+        public string PrintTripDetails()                                                    // metode for at printe alle turens detaljer
         {
             return $"Køreturdetaljere: " + _distance.ToString() + " - " + _tripDate.ToString() + " - " + _startTime.ToString() + " - " + _endTime.ToString() + "-" + TripDuration();
         }

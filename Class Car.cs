@@ -159,6 +159,7 @@ namespace CarApp
             _trips = new List<Trip>();
             _fuelType = fuelType;
             _gearType = gearType;
+        
         }
 
 
@@ -175,22 +176,16 @@ namespace CarApp
                 Console.WriteLine("Opdateret odometer: {0}", Odometer);
             }
 
-        }
+        }              //Opdaterer odometer med den nye angivet trip 
 
-        
-
-
-        //Print Car Details i consollen -> nu med opdateret kilometer tal
-        public string PrintCarDetails()
+                                        
+        public string PrintCarDetails()                                     //Print Car Details i consollen -> nu med opdateret kilometer tal
         {
 
             return $"Brand".PadRight(15) + "|" + "Model".PadRight(15) + "|" + "Year".PadRight(15) + "|" + "Mileage".PadRight(15) + "|" + "FuelConsumption".PadLeft(15)+
                    $"\n---------------|---------------|---------------|---------------|---------------"+
                    $"\n{Brand.PadRight(15)}  |  {Model.PadRight(15)} | {Year.ToString().PadRight(15)} | {Odometer.ToString().PadRight(15)} | {FuelConsumption.ToString().PadLeft(15)}";
-
-            //  PRØV AT RETURNERE EN STRING MED ALLE DE DETALJERE SOM KAN FORMATERES I PROGRAMMET
-
-            //Console.WriteLine("{0} {1} fra {2} med {3} - brændsstofforbrug på ca {4} km/l.", Brand, Model, Year.ToString(), Mileage.ToString(), FuelConsumption.ToString());
+       
         }
 
 
