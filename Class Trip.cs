@@ -10,12 +10,12 @@ namespace CarApp
 {
     public class Trip
     {
-        private double _distance;                                                           //PRIVAT PROPERTIES
+        private double _distance;                                                               //PRIVAT PROPERTIES
         private DateTime _tripDate;
         private DateTime _startTime;
         private DateTime _endTime;
         private double _tripPrice;
-
+        private double _literPrice;
 
         public double Distance                                                                  //GETTER SETTER FOR EACH PROPERTIES
         {
@@ -81,12 +81,14 @@ namespace CarApp
             }
         }
         public double TripPrice { get { return _tripPrice; } set { _tripPrice = value; } }
+        public double LiterPrice { get { return _literPrice; } set { _literPrice = value; } }
+
 
 
         /*Metoder og Constructor*/
 
 
-       
+
         public Trip(double distance, DateTime tripDate, DateTime startTime, DateTime endTime)           //CONSTRUCTOR
         {
             double Distance = distance;
@@ -141,12 +143,18 @@ namespace CarApp
                 }
                     _tripPrice = (_distance / kmPerLiter) * literPrice;
                     return _tripPrice;
-                
+
+                /* en anden måde at lave en afregning med afrundning til 2 decimaler
+                double tripPrice = Math.Round(((_distance / kmPerLiter) * literPrice), 2);     //rounded to 2 decimals     */
+
+
+
+
 
             }
             catch (DivideByZeroException dpz)                                                /*Exception - Divide  By  Zero*/
-            {
-                Console.Write("Den intastede værdi skal være over null", dpz.Message);
+                {
+                    Console.Write("Den intastede værdi skal være over null", dpz.Message);
                 return 0;                                                                   /* Programmet crasher hvis man ikke angive en "double" til at returnerer pga metodens datatype*/
             }
             finally

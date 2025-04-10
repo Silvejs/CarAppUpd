@@ -18,13 +18,13 @@ namespace CarApp
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Main Menu:");
+                Console.WriteLine("Hovedmenu:");
                 Console.WriteLine("1. Tilføj ny bil til registret");
                 Console.WriteLine("2. Print bil oplysninger");
-                Console.WriteLine("3. Tilføj ny køretur");                     
+                Console.WriteLine("3. Tilføj ny køretur til en bil");                     
                 Console.WriteLine("4. Print køretur oplysninger");
-                Console.WriteLine("5. ");
-                Console.WriteLine("6. Print bilregister");
+                Console.WriteLine("5. Print bilregister");
+                Console.WriteLine("6. Is Odometer en Palindrome?");
                 Console.WriteLine("7. Afslut");
                 Console.Write("Vælg i menu: ");
 
@@ -33,22 +33,22 @@ namespace CarApp
                 switch (choice)
                 {
                     case "1":
-                        TilføjNyBil()();
+                        TilføjBil();
                         break;
                     case "2":
-                        Drive();
+                        PrintBilOplysninger();
                         break;
                     case "3":
-                        CalculateTripPrice();
+                        TilføjKøretur();
                         break;
                     case "4":
-                        IsPalindrome();
+                        PrintBilregister();
                         break;
                     case "5":
-                        PrintCarDetails();
+                        PrintBilregister();
                         break;
                     case "6":
-                        PrintAllTeamCars();
+                        OdometerPalindrome();
                         break;
                     case "7":
                         Console.WriteLine("Exiting...");

@@ -7,64 +7,77 @@ using System.Threading.Tasks;
 
 namespace CarApp
 {
-    public class Menuer
+    public class Menu
     {
-        public void TilføjNyBil()
-        {
-            string mærke;
-            string model;
-            int årgang;
-            int odometer;
-            double kmPerLiter;
-            double distance;
-            double prisPerLiter;
-            GearType geartype;
-            FuelType fuelType;
-            DateTime tripDate = DateTime.Now.Date;
-            DateTime startTime = DateTime.Now;
-            DateTime endTime = DateTime.Now;
 
-            //bruger input (ekstern)
+        string mærke;
+        string model;
+        int årgang;
+        int odometer;
+        double kmPerLiter;
+        double distance;
+        double prisPerLiter;
+        GearType geartype;
+        FuelType fuelType;
+        DateTime tripDate = DateTime.Now.Date;
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = DateTime.Now;
+
+
+
+
+        public void TilføjBil()                                             //bruger input (ekstern) - Fikset
+        {
+          
+            Console.Clear();
+            Console.WriteLine("Indtast følgende biloplysninger: ");
             Console.WriteLine("Angiv mærke: ");
+
+            Console.Clear();
             mærke = Console.ReadLine();
+
+            Console.Clear();
             Console.WriteLine("Angiv model: ");
+
+            Console.Clear();
             model = Console.ReadLine();
+
+            Console.Clear();
             Console.WriteLine("Angiv årgang: ");
+
+            Console.Clear();
             årgang = Convert.ToInt32(Console.ReadLine());
+
+            Console.Clear();
             Console.WriteLine("Angiv odometer: ");
             odometer = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Angiv kmPerLiter: ");
+
+            Console.Clear();
+            Console.WriteLine("Angiv brændstofforbrug (km/L): ");
             kmPerLiter = Convert.ToDouble(Console.ReadLine());
+
+            Console.Clear();
             Console.WriteLine("Angiv brændstoftype: ");
-            fuelType = Enum.Parse<FuelType>(Console.ReadLine());
+            fuelType = Enum.Parse<FuelType>(Console.ReadLine().ToUpper());
+
+            Console.Clear();
             Console.WriteLine("Angiv gear type: ");
             geartype = Enum.Parse<GearType>(Console.ReadLine().ToUpper());
-        }
 
+            Car bil = new Car(mærke, model, årgang, odometer, kmPerLiter, fuelType, gearType);
 
-        static void ReadCarDetails()
-        {
-            Console.Clear();
-            Console.WriteLine("You selected Option 1.Read Car Details");
-
-            Console.WriteLine("Angiv venligst bilens oplysninger:");
-            Console.WriteLine("Mærke:");
-            string carBrand = Console.ReadLine();
-            Console.WriteLine("Model:");
-            string carModel = Console.ReadLine();
-            Console.WriteLine("Årgang:");
-            int carÅrgang = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Kilometer tal:");
-            int carKmTal = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Du har angivet følgende oplysninger om din bil: Bil :{0} - Model: {1} - Årgang: {2} - Km tal: {3}", carBrand, carModel, carÅrgang, carKmTal);
-
+            bil.PrintCarDetails();
             Console.WriteLine("Press any key to go back to the main menu...");
+
             Console.ReadKey();
         }
 
 
-        static void Drive()
+
+
+
+
+        public void PrintBilOplysninger()                           /*TODO*/
         {
             Console.Clear();
             Console.WriteLine("You selected Option 2.Drive");
@@ -95,7 +108,7 @@ namespace CarApp
         }
 
 
-        static void Drive()
+        public void TilføjKøretur()                             /*TODO*/
         {
             Console.Clear();
             Console.WriteLine("You selected Option 2.Drive");
@@ -126,7 +139,7 @@ namespace CarApp
         }
 
 
-        static void IsPalindrome()
+        static void IsPalindrome()                                      /*TODO*/
         {
             Console.Clear();
             Console.WriteLine("You selected Option 4.IsPalindrome");
@@ -151,7 +164,7 @@ namespace CarApp
         }
 
 
-        static void PrintCarDetails()
+        static void PrintCarDetails()                                           /*TODO*/
         {
             Console.Clear();
             Console.WriteLine("You selected Option 5.Print Car Details");
@@ -169,7 +182,7 @@ namespace CarApp
         }
 
 
-        static void PrintAllTeamCars()
+        static void PrintAllTeamCars()                                          /*TODO*/
         {
             Console.Clear();
             Console.WriteLine("You selected Option 6.Print All Team Cars");
@@ -189,9 +202,8 @@ namespace CarApp
 
 
 
-        Car bil1 = new Car(mærke, model, årgang, odometer, kmPerLiter, fuelType, geartype);         //instansiering af biler med constructor
-            Car bil1 = new Car(mærke, model, årgang, odometer, kmPerLiter, fuelType, geartype);         //instansiering af biler med constructor
-            // Car Bil2 = new Car(mærke, model, årgang, odometer, kmPerLiter);
+        
+           
 
 
 
