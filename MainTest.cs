@@ -36,9 +36,12 @@ namespace CarApp
             Console.WriteLine("Angiv kmPerLiter: ");
             kmPerLiter = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine("Angiv brændstoftype: ");
-            fuelType = Enum.Parse<FuelType>(Console.ReadLine().Substring(0).ToUpper());
-            
-            //Hvordan gør man at indtaste med LOWER eller UPPER case ??
+            fuelType = Enum.Parse<FuelType>(Console.ReadLine().ToUpper());
+            Console.WriteLine("Angiv gear type: ");
+            geartype = Enum.Parse<GearType>(Console.ReadLine().ToUpper());
+
+
+            //Hvordan gør man at indtaste med LOWER eller UPPER case HVOREFTER SYSTEMET HENTER VALUE I enum
 
             //skal man laver en switch? hvor man tager den individuelle svar og kører den til at være to UPPER eller LOWER ?
             
@@ -63,8 +66,7 @@ namespace CarApp
 
 
 
-            Console.WriteLine("Angiv gear type: ");
-            geartype = Enum.Parse<GearType>(Console.ReadLine());
+            
 
 
             Car bil1 = new Car(mærke, model, årgang, odometer, kmPerLiter, fuelType, geartype);         //instansiering af biler med constructor

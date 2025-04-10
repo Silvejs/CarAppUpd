@@ -160,18 +160,18 @@ namespace CarApp
 
 
         //Opdaterer odometer med den nye angivet trip 
-        public void Drive()
-        {
-            if (!IsEngineOn)
-            {
-                Console.WriteLine("Tænd bilen");
-            }
-            else
-            {
-                Odometer += Convert.ToInt32(Distance);
-            }
+        //public void Drive()
+        //{
+         //   if (!IsEngineOn)
+          //  {
+           //     Console.WriteLine("Tænd bilen");
+           // }
+           // else
+          //  {
+         //       Odometer += Convert.ToInt32(Distance);
+        //    }
 
-        }
+      //  }
 
 
 
@@ -232,7 +232,7 @@ namespace CarApp
 
         public void Drive1(Trip newTrip)
         {
-            if (IsEngineOn)
+            if (!IsEngineOn)
             { 
                 Odometer += (int)newTrip.Distance;
                 double tripPrice = CalculateTripPrice();
@@ -291,7 +291,7 @@ namespace CarApp
         Manual
     }
 
-
+//  OPGAVE 6 
 
 
 }
