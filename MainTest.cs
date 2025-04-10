@@ -9,9 +9,9 @@ using CarAppClassCar;
 
 namespace CarAppUpd
 {
-    public class Test
+    public class Menuer
     {
-        static void Main()
+        public void TilføjNyBil()
         {
             string mærke;
             string model;
@@ -40,9 +40,38 @@ namespace CarAppUpd
             Console.WriteLine("Angiv brændstoftype: ");
             fuelType = Enum.Parse<FuelType>(Console.ReadLine());
             Console.WriteLine("Angiv gear type: ");
-            geartype = Enum.Parse<GearType>(Console.ReadLine());
+            geartype = Enum.Parse<GearType>(Console.ReadLine().ToUpper());
 
 
+            //Hvordan gør man at indtaste med LOWER eller UPPER case HVOREFTER SYSTEMET HENTER VALUE I enum
+
+            //skal man laver en switch? hvor man tager den individuelle svar og kører den til at være to UPPER eller LOWER ?
+            
+            // string fuel = Console.ReadLine().ToLower();   
+            //if (fuel == "benzin")
+            //{
+            //  fuelType = FuelType.Benzin;
+            //}
+            //else if (fuel == "diesel")
+            //{
+            //    fuelType = FuelType.Diesel;
+            //}
+            //else if (fuel == "hybrid")
+            //{
+            //    fuelType = FuelType.Hybrid;
+            //}
+            //else if (fuel == "elektrisk")
+            //{
+            //    fuelType = FuelType.Elektrisk;
+            //}
+
+
+
+
+            
+
+
+            Car bil1 = new Car(mærke, model, årgang, odometer, kmPerLiter, fuelType, geartype);         //instansiering af biler med constructor
             Car bil1 = new Car(mærke, model, årgang, odometer, kmPerLiter, fuelType, geartype);         //instansiering af biler med constructor
             // Car Bil2 = new Car(mærke, model, årgang, odometer, kmPerLiter);
 
@@ -56,7 +85,7 @@ namespace CarAppUpd
 
 
 
-            bil1.Drive(true, distance);             // Drive metoden
+            bil1.Drive();             // Drive metoden
 
 
             List<Trip> trips = new List<Trip>();

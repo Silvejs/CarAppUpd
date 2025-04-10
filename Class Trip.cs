@@ -111,9 +111,13 @@ namespace CarAppClassTrip
             return (_distance / kmPerLiter) * literPrice;
         }
 
-        public void PrintTripDetails()      // metode for at printe alle turens detaljer
+        public string PrintTripDetails()      // metode for at printe alle turens detaljer
         {
+<<<<<<< Updated upstream
             Console.WriteLine("Køreturdetaljere; " + _distance.ToString() + " - " + _tripDate.ToString() + " - " + _startTime.ToString() + " - " + _endTime.ToString() + "-" + TripDuration());
+=======
+            return $"Køreturdetaljere; " + _distance.ToString() + " - " + TripDate.ToShortDateString() + " - " + StartTime.ToShortDateString() + " - " + EndTime.ToShortDateString();
+>>>>>>> Stashed changes
         }
     }
 }
