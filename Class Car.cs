@@ -23,7 +23,8 @@ namespace CarApp
         private List<Trip> _trips;
         private GearType _gearType;
         private double _kmPerLiter { get; set; }
-        private double _tripPrice { get; set; }
+        private double _fuelUsed;
+
 
 
 
@@ -139,10 +140,12 @@ namespace CarApp
                 }
             }
         }
-        
-        
+        private double KmPerLiter { get {return _kmPerLiter;} set {_kmPerLiter = value; } }
+        private double FuelUsed { get { return _fuelUsed; } set { _fuelUsed = value; } }
 
-       
+
+
+
 
 
         //CONSTRUCTOR
@@ -198,10 +201,8 @@ namespace CarApp
                 {
                     throw new DivideByZeroException("Invalid input \nIndtastning skal være over null!!");
                 }
-                else
-                {
-                    FuelUsed = Distance / KmPerLiter;
-                }
+                
+                FuelUsed = Distance / KmPerLiter;
                 return FuelUsed;
         }
         

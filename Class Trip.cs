@@ -80,6 +80,7 @@ namespace CarApp
                 }
             }
         }
+        public double TripPrice { get { return _tripPrice; } set { _tripPrice = value; } }
 
         //CONSTRUCTOR
         public Trip(double distance, DateTime tripDate, DateTime startTime, DateTime endTime)
@@ -121,8 +122,8 @@ namespace CarApp
             }
             catch (DivideByZeroException dpz)                                       /*Exception - Divide  By  Zero*/
             {
-                Console.WriteLine("Den intastede værdi skal vær over null", dpz.Message);
-                return 
+                Console.Write("Den intastede værdi skal vær over null", dpz.Message);
+                return 0;                                                                   /* Programmet crasher hvis man ikke angive en "double" til at returnerer pga metodens datatype*/
             }
             finally
             {
