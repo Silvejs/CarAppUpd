@@ -143,7 +143,7 @@ namespace CarApp
 
         public GearType GearType { get { return _gearType; } set { _gearType = value; } }
 
-        public string Nummerplade { get { return _nummerplade} set {_nummerplade = value; } }
+        public string Nummerplade { get { return _nummerplade; } set {_nummerplade = value; } }
 
 
 
@@ -160,7 +160,6 @@ namespace CarApp
             _fuelType = fuelType;
             _gearType = gearType;
             _nummerplade = nummerplade;
-            _trips = new List<Trip>();
 
         }
 
@@ -190,7 +189,7 @@ namespace CarApp
         }
 
 
-        public void Drive1(Trip newTrip)
+        public void Drive(Trip newTrip)
         {
             if (!IsEngineOn)
             { 

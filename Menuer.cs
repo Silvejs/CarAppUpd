@@ -15,6 +15,8 @@ namespace CarApp
 
         static void MainMenu()
         {
+            Menu EntryPoint = new Menu();
+            var bil = new CarApp();
             while (true)
             {
                 Console.Clear();
@@ -33,22 +35,22 @@ namespace CarApp
                 switch (choice)
                 {
                     case "1":
-                        TilføjBil();
+                        EntryPoint.TilføjBil();            
                         break;
                     case "2":
-                        PrintBilOplysninger();
+                        EntryPoint.PrintBilOplysninger();
                         break;
                     case "3":
-                        TilføjKøretur();
+                        EntryPoint.TilføjKøretur();
                         break;
                     case "4":
-                        PrintBilregister();
+                        EntryPoint.PrintBilregister();
                         break;
                     case "5":
-                        PrintBilregister();
+                        EntryPoint.PrintBilregister();
                         break;
                     case "6":
-                        OdometerPalindrome();
+                        EntryPoint.OdometerPalindrome();
                         break;
                     case "7":
                         Console.WriteLine("Exiting...");

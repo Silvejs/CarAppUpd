@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace CarApp
 {
+
+    
+
+
     public class Menu
     {
 
@@ -22,12 +26,12 @@ namespace CarApp
         DateTime tripDate = DateTime.Now.Date;
         DateTime startTime = DateTime.Now;
         DateTime endTime = DateTime.Now;
-        List<Car> bilRegister;
         string nummerplade;
         List<Trip> tripList;
+        List<Car> bilRegister = new List<Car>();
 
-
-        public void TilføjBil()                                             //bruger input - Biloplysninger - FIKSET
+        public void TilføjBil()                                             //bruger input - Biloplysninger 
+                                                                                    // TJEK OM DET VIRKER ELLER FIND EN LØSNING!!!!
         {
           
             Console.Clear();
@@ -98,6 +102,7 @@ namespace CarApp
 
 
         public void TilføjKøretur()                                         /*TODO - Tilføj ny køretur, med dato, starttidspunkt og sluttidspunkt og tilføjer den til en list*/
+                                                                                    /* TJEK OM DET VIRKER ELLER FIND EN LØSNING*/
 
         {
             Console.Clear();
@@ -124,15 +129,30 @@ namespace CarApp
             endTime = Convert.ToDateTime(Console.ReadLine());
 
             Trip trip = new Trip(distance, tripDate, startTime, endTime);
-            tripList.Add(trip);
 
+
+            foreach (var bil in bilRegister)                // der skal være tilknyttet nummerplade og ikke indeks - VIRKER DEN???? - SE OM DET VIRKER
+            {
+                if (bil.Nummerplade == nummerplade)
+                {
+                    
+                    bil.Drive(trip);                     
+
+                }
+
+            }
             Console.WriteLine("\nKøretur tilføjet til bil: {0}", nummerplade);
             Console.WriteLine("\nPress any key to go back to the main menu...");
             Console.ReadKey();
         }
 
 
-        public void PrintKøretur()                                      /*TODO*/
+
+
+
+
+        public void PrintKøretur()                                      /*TODO - Find en kåøretur tur som skal printes ud i consolen fx ud fra en dato*/
+                                                                                /* Der skal kunne vælges en bestemt tur i tilfældet at der er flere ture med samme dato*/
         {
             Console.Clear();
             Console.WriteLine("Du har valgt 4.Print køretur oplysninger");
@@ -165,17 +185,23 @@ namespace CarApp
         }
 
 
-        static void PrintAllTeamCars()                                          /*TODO*/
+        public bool OdometerPalindrome()                                /* Er odometeren en Palindrome?  -  FIKSET - TJEK OM DET VIRKER */
         {
-            Console.Clear();
-            Console.WriteLine("Du har valgt 1.Tilføj ny bil til registret: ");
+            
+            int originalNumber = odometer;
+            int remainder, reversedNumber = 0;
 
+            while (odometer > 0)
+            {
+                remainder = odometer % 10;
+                reversedNumber = (reversedNumber * 10) + remainder;
+                odometer /= 10;
+            }
 
-
-
-            Console.WriteLine("Press any key to go back to the main menu...");
-            Console.ReadKey();
+            return originalNumber == reversedNumber;
         }
+
+       
 
 
 
@@ -190,26 +216,7 @@ namespace CarApp
 
 
 
-            Console.WriteLine("Ønsket køretur i km : ");
-            distance = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Starttidspunkt for turen :");
-            // user input omkring dato og start og sluttidspunkt for turen
-
-
-
-
-            bil1.Drive();             // Drive metoden
-
-
-            List<Trip> trips = new List<Trip>();
-            Trip trip1 = new Trip(distance, tripDate, startTime, endTime.AddMinutes(37));
-            Trip trip2 = new Trip(distance, tripDate, startTime.AddHours(1), endTime.AddHours(1).AddMinutes(23));
-
-
-
-            //input fra bruger 
-            Trip newTrip = new Trip(distance, tripDate, startTime, endTime.AddMinutes(37));
-            bil1.Drive(newTrip);  
+            /*
 
             Console.WriteLine("Angiv brændstofpris i kr: ");
             prisPerLiter = Convert.ToDouble(Console.ReadLine());
@@ -228,11 +235,13 @@ namespace CarApp
 
 
             Console.ReadKey();
-        }
+
+
+
+        */
+        
     }
 }
 
 
 
-// KIG TIL DATE ; START OG SLUTTIME...DER SKAL ARBEJDES LIDT MED DEM :
-//udover det ...tjek hvordan kan man printe alle trips
