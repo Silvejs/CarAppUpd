@@ -10,42 +10,39 @@ namespace CarApp
     public class Menu
     {
 
-        string mærke;
+        string brand;
         string model;
         int årgang;
         int odometer;
         double kmPerLiter;
         double distance;
         double prisPerLiter;
-        GearType geartype;
+        GearType gearType;
         FuelType fuelType;
         DateTime tripDate = DateTime.Now.Date;
         DateTime startTime = DateTime.Now;
         DateTime endTime = DateTime.Now;
+        List<Car> bilRegister;
+        string nummerplade;
+        List<Trip> tripList;
 
 
-
-
-        public void TilføjBil()                                             //bruger input (ekstern) - Fikset
+        public void TilføjBil()                                             //bruger input - Biloplysninger - FIKSET
         {
           
             Console.Clear();
-            Console.WriteLine("Indtast følgende biloplysninger: ");
-            Console.WriteLine("Angiv mærke: ");
-
+            Console.WriteLine("Du har valgt 1.Tilføj ny bil til registret.\nIndtast følgende biloplysninger: ");
+                       
             Console.Clear();
-            mærke = Console.ReadLine();
+            Console.WriteLine("Angiv mærke: ");
+            brand = Console.ReadLine();
 
             Console.Clear();
             Console.WriteLine("Angiv model: ");
-
-            Console.Clear();
             model = Console.ReadLine();
 
             Console.Clear();
             Console.WriteLine("Angiv årgang: ");
-
-            Console.Clear();
             årgang = Convert.ToInt32(Console.ReadLine());
 
             Console.Clear();
@@ -62,100 +59,89 @@ namespace CarApp
 
             Console.Clear();
             Console.WriteLine("Angiv gear type: ");
-            geartype = Enum.Parse<GearType>(Console.ReadLine().ToUpper());
+            gearType = Enum.Parse<GearType>(Console.ReadLine().ToUpper());
 
-            Car bil = new Car(mærke, model, årgang, odometer, kmPerLiter, fuelType, gearType);
+            Console.Clear();
+            Console.WriteLine("Angiv registreringsnummer: ");
+            nummerplade = Console.ReadLine();
+
+            Car bil = new Car(brand, model, årgang, odometer, kmPerLiter, fuelType, gearType, nummerplade);
 
             bil.PrintCarDetails();
-            Console.WriteLine("Press any key to go back to the main menu...");
+            Console.WriteLine("\n{0} er blevet tilføjet bilregistret", bil.PrintCarDetails);
+            bilRegister.Add(bil);
+
+            Console.WriteLine("\nPress any key to go back to the main menu...");
 
             Console.ReadKey();
         }
 
 
 
-
-
-
-        public void PrintBilOplysninger()                           /*TODO*/
+        public void PrintBilOplysninger()                                       /* bruger input - FIKSET - Vælg en bil og print alle oplysninger */
         {
             Console.Clear();
-            Console.WriteLine("You selected Option 2.Drive");
-
-            Console.WriteLine("\nStart engine!");               //hvordan laver man så man kan
-                                                                //også hente en falsk værdi fra BOOL
-            bool isEngineOn = true;
-
-            Console.WriteLine("\nKilometertal: ");
-            int carKmTal = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("\nTrip: ");
-            double distance = Convert.ToDouble(Console.ReadLine());
-
-
-            if (isEngineOn == true)
+            Console.WriteLine("Du har valgt 2. Print bil oplysninger.");
+            Console.WriteLine("Indtast nummerplade for at se biloplysninger");
+            nummerplade = Console.ReadLine();
+            foreach (var bil in bilRegister)
             {
-                carKmTal += Convert.ToInt32(distance);
-                Console.WriteLine("\nTrip : {0} - Aktualiseret odometer: {1}", distance, carKmTal);
+                bilRegister.Find(bil => bil.Nummerplade.Contains(nummerplade));
+                bil.PrintCarDetails();
             }
-            else
-            {
-                Console.WriteLine("\nStart engine for at læse odometer");
-            }
-
-            Console.WriteLine("Press any key to go back to the main menu...");
+            
+            Console.WriteLine("\nPress any key to go back to the main menu...");
             Console.ReadKey();
         }
 
 
-        public void TilføjKøretur()                             /*TODO*/
+
+
+        public void TilføjKøretur()                                         /*TODO - Tilføj ny køretur, med dato, starttidspunkt og sluttidspunkt og tilføjer den til en list*/
+
         {
             Console.Clear();
-            Console.WriteLine("You selected Option 2.Drive");
+            Console.WriteLine("Du har valgt 3. Tilføj ny køretur.");
 
-            Console.WriteLine("\nStart engine!");               //hvordan laver man så man kan
-                                                                //også hente en falsk værdi fra BOOL
-            bool isEngineOn = true;
+            Console.Clear();
+            Console.WriteLine("Angiv registreringsnummer: ");
+            nummerplade = Console.ReadLine();
 
-            Console.WriteLine("\nKilometertal: ");
-            int carKmTal = Convert.ToInt32(Console.ReadLine());
+            Console.Clear();
+            Console.WriteLine("Angiv afstand i km: ");
+            distance = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine("\nTrip: ");
-            double distance = Convert.ToDouble(Console.ReadLine());
+            Console.Clear();
+            Console.WriteLine("Angiv køretur dato (ÅÅÅÅ-MM-DD): ");
+            tripDate = Convert.ToDateTime(Console.ReadLine());
 
+            Console.Clear();
+            Console.WriteLine("Angiv køretur starttidspunkt (TT:MM): ");
+            startTime = Convert.ToDateTime(Console.ReadLine());
 
-            if (isEngineOn == true)
-            {
-                carKmTal += Convert.ToInt32(distance);
-                Console.WriteLine("\nTrip : {0} - Aktualiseret odometer: {1}", distance, carKmTal);
-            }
-            else
-            {
-                Console.WriteLine("\nStart engine for at læse odometer");
-            }
+            Console.Clear();
+            Console.WriteLine("Angiv køewtur sluttidspunkt (TT:MM): ");
+            endTime = Convert.ToDateTime(Console.ReadLine());
 
-            Console.WriteLine("Press any key to go back to the main menu...");
+            Trip trip = new Trip(distance, tripDate, startTime, endTime);
+            tripList.Add(trip);
+
+            Console.WriteLine("\nKøretur tilføjet til bil: {0}", nummerplade);
+            Console.WriteLine("\nPress any key to go back to the main menu...");
             Console.ReadKey();
         }
 
 
-        static void IsPalindrome()                                      /*TODO*/
+        public void PrintKøretur()                                      /*TODO*/
         {
             Console.Clear();
-            Console.WriteLine("You selected Option 4.IsPalindrome");
-
-            Console.WriteLine("Odometer: ");
-            int kmTal = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Du har valgt 4.Print køretur oplysninger");
 
 
-            if (Palindrome(kmTal))
-            {
-                Console.WriteLine("{0} is a palindrome", kmTal);
-            }
-            else
-            {
-                Console.WriteLine("{0} is not a palindrome", kmTal);
-            }
+
+
+
+
 
             Console.WriteLine("Press any key to go back to the main menu...");
             Console.ReadKey();
@@ -164,18 +150,15 @@ namespace CarApp
         }
 
 
-        static void PrintCarDetails()                                           /*TODO*/
+        public void PrintBilregister()                                           /*TODO*/
         {
             Console.Clear();
-            Console.WriteLine("You selected Option 5.Print Car Details");
-            string brand = "Ford";
-            string model = "Focus";
-            int årgang = 2010;
-            int kmTal = 321123;
-            double kmPerLiter = 23;
+            Console.WriteLine("Du har valgt 5. Print bilregister");
+            
 
 
-            Console.WriteLine("{0} {1} fra {2} med {3} - brændsstofforbrug på ca {4} km/l.", brand, model, årgang.ToString(), kmTal.ToString(), kmPerLiter.ToString());
+
+
 
             Console.WriteLine("Press any key to go back to the main menu...");
             Console.ReadKey();
@@ -185,7 +168,7 @@ namespace CarApp
         static void PrintAllTeamCars()                                          /*TODO*/
         {
             Console.Clear();
-            Console.WriteLine("You selected Option 6.Print All Team Cars");
+            Console.WriteLine("Du har valgt 1.Tilføj ny bil til registret: ");
 
 
 

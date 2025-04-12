@@ -24,6 +24,8 @@ namespace CarApp
         private double _kmPerLiter; 
         private double _fuelUsed;
         private double _literPrice;
+        private List<Car> bilRegister;
+        private string _nummerplade;
 
 
 
@@ -33,8 +35,7 @@ namespace CarApp
 
 
 
-
-        public string Brand                 // getter setter for BRAND property
+        public string Brand                                      // getter setter for BRAND property
         {
             get { return _brand; }
             set
@@ -142,13 +143,13 @@ namespace CarApp
 
         public GearType GearType { get { return _gearType; } set { _gearType = value; } }
 
+        public string Nummerplade { get { return _nummerplade} set {_nummerplade = value; } }
 
 
 
 
 
-
-        public Car(string brand, string model, int årgang, int mileage, double kmPerLiter, FuelType fuelType, GearType gearType)        /* CAR CONSTRUCTOR*/
+        public Car(string brand, string model, int årgang, int mileage, double kmPerLiter, FuelType fuelType, GearType gearType, string nummerplade)        /* CAR CONSTRUCTOR*/
         {
             Brand = brand;
             Model = model;
@@ -158,7 +159,9 @@ namespace CarApp
             _trips = new List<Trip>();
             _fuelType = fuelType;
             _gearType = gearType;
-        
+            _nummerplade = nummerplade;
+            _trips = new List<Trip>();
+
         }
 
 
@@ -180,9 +183,9 @@ namespace CarApp
         public string PrintCarDetails()                                     //Print Car Details i consollen -> nu med opdateret kilometer tal
         {
 
-            return $"Brand".PadRight(15) + "|" + "Model".PadRight(15) + "|" + "Year".PadRight(15) + "|" + "Mileage".PadRight(15) + "|" + "Km/L".PadLeft(15) + "Brændstof".PadLeft(15) + "Gear".PadLeft(15) +
-                   $"\n---------------|---------------|---------------|---------------|---------------|---------------|---------------" +
-                   $"\n{Brand.PadRight(15)}  |  {Model.PadRight(15)} | {Årgang.ToString().PadRight(15)} | {Odometer.ToString().PadRight(15)} | {KmPerLiter.ToString().PadLeft(15)} | {FuelType.ToString().PadLeft(15)} | {GearType.ToString().PadLeft(15)}";
+            return $"Nummerplade".PadRight(15) + "|" +  "Brand".PadRight(15) + "|" + "Model".PadRight(15) + "|" + "Year".PadRight(15) + "|" + "Mileage".PadRight(15) + "|" + "Km/L".PadRight(15) + "Brændstof".PadRight(15) + "Gear".PadLeft(15) +
+                   $"\n---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------" +
+                   $"\n{Nummerplade.PadRight(15)} + {Brand.PadRight(15)}  |  {Model.PadRight(15)} | {Årgang.ToString().PadRight(15)} | {Odometer.ToString().PadRight(15)} | {KmPerLiter.ToString().PadRight(15)} | {FuelType.ToString().PadRight(15)} | {GearType.ToString().PadLeft(15)}";
        
         }
 

@@ -20,8 +20,8 @@ namespace CarApp
                 Console.Clear();
                 Console.WriteLine("Hovedmenu:");
                 Console.WriteLine("1. Tilføj ny bil til registret");
-                Console.WriteLine("2. Print bil oplysninger");
-                Console.WriteLine("3. Tilføj ny køretur til en bil");                     
+                Console.WriteLine("2. Print bil oplysninger via nummerplade");
+                Console.WriteLine("3. Tilføj ny køretur");                     
                 Console.WriteLine("4. Print køretur oplysninger");
                 Console.WriteLine("5. Print bilregister");
                 Console.WriteLine("6. Is Odometer en Palindrome?");
