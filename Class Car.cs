@@ -26,7 +26,7 @@ namespace CarApp
         private double _literPrice;
         private List<Car> bilRegister;
         private string _nummerplade;
-
+        private string _date;
 
 
 
@@ -145,16 +145,18 @@ namespace CarApp
 
         public string Nummerplade { get { return _nummerplade; } set {_nummerplade = value; } }
 
+        public string Date { get { return _date; } set { _date = value; } }  
 
 
 
 
-        public Car(string brand, string model, int årgang, int mileage, double kmPerLiter, FuelType fuelType, GearType gearType, string nummerplade)        /* CAR CONSTRUCTOR*/
+
+        public Car(string brand, string model, int årgang, int odometer, double kmPerLiter, FuelType fuelType, GearType gearType, string nummerplade)        /* CAR CONSTRUCTOR*/
         {
             Brand = brand;
             Model = model;
             Årgang = årgang ;
-            Odometer = mileage;
+            Odometer = odometer;
             KmPerLiter = kmPerLiter;
             _trips = new List<Trip>();
             _fuelType = fuelType;
@@ -164,9 +166,11 @@ namespace CarApp
         }
 
 
-        public void Drive(bool isEngineOn, double distance)
+
+
+        public void Drive()
         {
-            if (!isEngineOn)
+            if (!IsEngineOn)
             {
                 Console.WriteLine("Tænd bilen");
             }
@@ -222,16 +226,16 @@ namespace CarApp
         }
 
 
-        public List<Trip> GetTripsByDate(string date)                       //vi arbejder med TRIP klassen derfor er datatypen i metoden LIST
+        public List<Trip> GetTripsByDate()                       //vi arbejder med TRIP klassen derfor er datatypen i metoden LIST
         {
             List<Trip> tripsByDate = new List<Trip>();              //instansieriser en nye liste for at gemme de ture med den angivne dato
 
-            date = Convert.ToDateTime(date).ToShortDateString();    //instansieriser = husk at convertere til dato
+            Date = Convert.ToDateTime(Date).ToShortDateString();    //instansieriser = husk at convertere til dato
 
 
             foreach (Trip trip in _trips)                           //foreach loop for at tjekke hver trip om den indeholder datoen
             {
-                if (trip.TripDate.ToShortDateString() == date)
+                if (trip.TripDate.ToShortDateString() == Date)
                 {
                     tripsByDate.Add(trip);                          //gem turen til en anden liste
                 }
@@ -243,7 +247,7 @@ namespace CarApp
         }
 
 
-        public bool Palindrome(int Odometer)                                /* Er odometeren en Palindrome? */
+        public bool Palindrome()                                /* Er odometeren en Palindrome? */
         {
             _odometer = Odometer;
             int originalNumber = Odometer;
