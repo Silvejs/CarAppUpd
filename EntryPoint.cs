@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic.FileIO;
 
 
 namespace CarApp
@@ -15,88 +18,103 @@ namespace CarApp
     public class Menu
     {
 
-        string brand;
-        string model;
-        int årgang;
-        int odometer;
-        double kmPerLiter;
-        double distance;
-        double prisPerLiter;
-        GearType gearType;
-        FuelType fuelType;
-        DateTime tripDate;
-        DateTime startTime;
-        DateTime endTime;
-        string nummerplade;
-        List<Trip> tripList;
-        List<Car> bilRegister = new List<Car>();
-        string date;
 
-        public void TilføjBil()                                             //bruger input - Biloplysninger 
-                                                                                    // TJEK OM DET VIRKER ELLER FIND EN LØSNING!!!!
+           
+        List<Car> bilRegister = new List<Car>();
+       
+
+        public void TilføjBil()                                             //bruger input - Biloplysninger - FIKSET!!!!
+                                                                                    
         {
-          
+            
             Console.Clear();
-            Console.WriteLine("Du har valgt 1.Tilføj ny bil til registret.\nIndtast følgende biloplysninger: ");
+            Console.WriteLine("\nDu har valgt 1.Tilføj ny bil til registret.\nIndtast følgende biloplysninger: ");
                        
             Console.Clear();
-            Console.WriteLine("Angiv mærke: ");
-            brand = Console.ReadLine();
+            Console.WriteLine("\nAngiv mærke: ");
+            string brand = Console.ReadLine();
 
             Console.Clear();
-            Console.WriteLine("Angiv model: ");
-            model = Console.ReadLine();
+            Console.WriteLine("\nAngiv model: ");
+            string model = Console.ReadLine();
 
             Console.Clear();
-            Console.WriteLine("Angiv årgang: ");
-            årgang = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nAngiv årgang: ");
+            int årgang = Convert.ToInt32(Console.ReadLine());
 
             Console.Clear();
-            Console.WriteLine("Angiv odometer: ");
-            odometer = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nAngiv odometer: ");
+            int odometer = Convert.ToInt32(Console.ReadLine());
 
             Console.Clear();
-            Console.WriteLine("Angiv brændstofforbrug (km/L): ");
-            kmPerLiter = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("\nAngiv brændstofforbrug (km/L): ");
+            double kmPerLiter = Convert.ToDouble(Console.ReadLine());
 
             Console.Clear();
-            Console.WriteLine("Angiv brændstoftype: ");
-            fuelType = Enum.Parse<FuelType>(Console.ReadLine().ToUpper());
+            Console.WriteLine("\nAngiv brændstoftype: ");
+            FuelType fuelType = Enum.Parse<FuelType>(Console.ReadLine().ToUpper());
 
             Console.Clear();
-            Console.WriteLine("Angiv gear type: ");
-            gearType = Enum.Parse<GearType>(Console.ReadLine().ToUpper());
+            Console.WriteLine("\nAngiv gear type: ");
+            GearType gearType = Enum.Parse<GearType>(Console.ReadLine().ToUpper());
 
             Console.Clear();
-            Console.WriteLine("Angiv registreringsnummer: ");
-            nummerplade = Console.ReadLine();
+            Console.WriteLine("\nAngiv registreringsnummer: ");
+            string nummerplade = Console.ReadLine();
 
             Car bil = new Car(brand, model, årgang, odometer, kmPerLiter, fuelType, gearType, nummerplade);
+            bilRegister.Add(bil);   
+            
+            
+          
+            
+            Console.WriteLine($"\n{bil.Brand} {bil.Model} er blevet tilføjet bilregistret");
+            Console.WriteLine();
 
-            bil.PrintCarDetails();
-            Console.WriteLine("\n{0} er blevet tilføjet bilregistret", bil.PrintCarDetails);
-            bilRegister.Add(bil);
+            //Console.WriteLine($"Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
+            //                $"\n--------------- | --------------- | --------------- | --------------- | ---------------");
 
-            Console.WriteLine("\nPress any key to go back to the main menu...");
+            Console.WriteLine(HeadPrintCarDetails());
+            Console.WriteLine(bil.PrintCarDetails());
+
+
+
+            Console.WriteLine("\nTilbage til hovedmenu...");
 
             Console.ReadKey();
         }
 
 
 
-        public void PrintBilOplysninger()                                       /* bruger input - FIKSET - Vælg en bil og print alle oplysninger */
+        public void PrintBilOplysninger()                                       /* bruger input  - Vælg en bil og print alle oplysninger  -  FIKSET!!!*/
         {
-            Console.Clear();
-            Console.WriteLine("Du har valgt 2. Print bil oplysninger.");
-            Console.WriteLine("Indtast nummerplade for at se biloplysninger");
-            nummerplade = Console.ReadLine();
-            foreach (var bil in bilRegister)
+            Console.Clear();            
+            Console.WriteLine("\nDu har valgt 2. Print bil oplysninger.");
+            Console.WriteLine("\nIndtast nummerplade for at se biloplysninger");
+
+            string nrplade = Console.ReadLine();
+            List<Car> foundCar = bilRegister.Where(p => p.Nummerplade == nrplade).ToList();
+            Console.WriteLine();
+
+
+            //Console.WriteLine($"Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
+            //                $"\n--------------- | --------------- | --------------- | --------------- | ---------------");
+
+            Console.WriteLine(HeadPrintCarDetails());
+
+            foreach (var bil in foundCar)                                                 
             {
-                bilRegister.Find(bil => bil.Nummerplade.Contains(nummerplade));
-                bil.PrintCarDetails();
+                if (foundCar != null)
+                {
+                    Console.WriteLine(bil.PrintCarDetails());
+                }
+                else
+                {
+                    Console.WriteLine("\nRegistreringsnummer ikke fundet!");
+                }
             }
             
-            Console.WriteLine("\nPress any key to go back to the main menu...");
+            Console.WriteLine("\nTilbage til hovedmenu...");
             Console.ReadKey();
         }
 
@@ -112,39 +130,45 @@ namespace CarApp
 
             Console.Clear();
             Console.WriteLine("Angiv registreringsnummer: ");
-            nummerplade = Console.ReadLine();
+            string nrplade = Console.ReadLine();
 
             Console.Clear();
             Console.WriteLine("Angiv afstand i km: ");
-            distance = Convert.ToDouble(Console.ReadLine());
+            double distance = Convert.ToDouble(Console.ReadLine());
 
             Console.Clear();
             Console.WriteLine("Angiv køretur dato (ÅÅÅÅ-MM-DD): ");
-            tripDate = Convert.ToDateTime(Console.ReadLine());
+            DateTime tripDate = Convert.ToDateTime(Console.ReadLine());
 
             Console.Clear();
             Console.WriteLine("Angiv køretur starttidspunkt (TT:MM): ");
-            startTime = Convert.ToDateTime(Console.ReadLine());
+            DateTime startTime = Convert.ToDateTime(Console.ReadLine());
 
             Console.Clear();
-            Console.WriteLine("Angiv køewtur sluttidspunkt (TT:MM): ");
-            endTime = Convert.ToDateTime(Console.ReadLine());
+            Console.WriteLine("Angiv køretur sluttidspunkt (TT:MM): ");
+            DateTime endTime = Convert.ToDateTime(Console.ReadLine());
 
-            Trip trip = new Trip(distance, tripDate, startTime, endTime);
+            Trip køretur = new Trip(distance, tripDate, startTime, endTime);
 
 
-            foreach (var bil in bilRegister)                // der skal være tilknyttet nummerplade og ikke indeks - VIRKER DEN???? - SE OM DET VIRKER
+            List<Car> foundCar = bilRegister.Where(p => p.Nummerplade == nrplade).ToList();
+
+            foreach (var bil in foundCar)                                           // der skal være tilknyttet nummerplade og ikke indeks - VIRKER DEN???? - SE OM DET VIRKER
             {
-                if (bil.Nummerplade == nummerplade)
-                {
-                    
-                    bil.Drive(trip);                     
 
-                }
-
+                    bil.Drive(køretur);
+                
             }
-            Console.WriteLine("\nKøretur tilføjet til bil: {0}", nummerplade);
-            Console.WriteLine("\nPress any key to go back to the main menu...");
+
+
+            Console.WriteLine($"\nKøretur tilføjet til registreringsnummer: {nrplade}");
+
+            Console.WriteLine();
+            Console.WriteLine(HeadPrintTripDetails());
+            Console.WriteLine(køretur.PrintTripDetails());
+
+            Console.WriteLine();
+            Console.WriteLine("\nTilbage til hovedmenu...");
             Console.ReadKey();
         }
 
@@ -160,25 +184,87 @@ namespace CarApp
             Console.WriteLine("Du har valgt 4.Udskriv køretur oplysninger");
 
             while (true)
-            {
-                Car bil = new Car(brand, model, årgang, odometer, kmPerLiter, fuelType, gearType, nummerplade); 
+            {   
+                
+                
 
                 string input = Console.ReadLine();
                 Console.WriteLine("1.Udskiv alle kørerturer for en registreret bil");
                 Console.WriteLine("2.Udskirv køreturer for en registreret bil fra en udvalgt dato");
                 Console.WriteLine("3.Tilbage til hovedmenu");
 
-                switch (input)
+               switch (input)
                 {
                     case ("1"):
-                        bil.PrintAllTrips();
+
+                        Console.Clear();
+                        Console.WriteLine("\nIndtast nummerplade for at se køreturene for en bil: ");
+                        string nrplade = Console.ReadLine();
+                        
+
+                        List<Car> foundCar = bilRegister.Where(p => p.Nummerplade == nrplade).ToList();
+                        Console.WriteLine();
+
+
+                        foreach (var car in foundCar)
+                        {
+                           
+                            var trips = car.PrintAllTrips();
+                            foreach (var trip in trips)
+                            { 
+                            Console.WriteLine(trip.PrintTripDetails());
+                            }
+
+                        }
+
+                        Console.WriteLine("Tilbage...");
                         break;
+
+
+
+
+
+
+
                     case "2":
-                        bil.GetTripsByDate();
+                        Console.Clear();
+                        Console.WriteLine("\nIndtast nummerplade for at se køreturene på dagen");
+                        string nplade = Console.ReadLine();
+                        
+                        
+                        List<Car> foundCarsTrips = bilRegister.Where(p => p.Nummerplade == nplade).ToList();
+                        Console.WriteLine();
+
+                        Console.WriteLine("\nIndtast dato for at se alle køreturer på dagen (ÅÅÅÅ-MM-DD): ");
+                        DateTime date = Convert.ToDateTime(Console.ReadLine());
+
+
+                        foreach (var car in foundCarsTrips)
+
+                        {
+
+                            var trips = car.GetTripsByDate();
+                            List<Trip> tripsByDate = trips.Where(p => p.TripDate == date).ToList();
+
+
+                            foreach (var trip in tripsByDate)
+                            {
+                                Console.WriteLine(trip.PrintTripDetails());
+                            }
+
+                            
+                        }
+
+                        Console.WriteLine("\nTilbage...");
                         break;
+
+
+
+
                      case ("3"):
                         Console.WriteLine("Afvent...");
                         return;
+
                      default:
                         break;
 
@@ -191,63 +277,67 @@ namespace CarApp
 
 
 
-        public void PrintBilregister()                                           /*TODO*/
+        public void PrintBilregister()                                           /*TODO - FIKSET*/
         {
             Console.Clear();
             Console.WriteLine("Du har valgt 5. Print bilregister");
-            
+            //Console.WriteLine($"Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
+            //                  $"\n--------------- | --------------- | --------------- | --------------- | ---------------");
+
+            Console.WriteLine(HeadPrintCarDetails());
 
 
-
-
-
-            Console.WriteLine("Press any key to go back to the main menu...");
-            Console.ReadKey();
-        }
-
-
-        public bool OdometerPalindrome()                                /* Er odometeren en Palindrome?  -  FIKSET - TJEK OM DET VIRKER */
-        {
-            
-            int originalNumber = odometer;
-            int remainder, reversedNumber = 0;
-
-            while (odometer > 0)
+            foreach (var bil in bilRegister) 
             {
-                remainder = odometer % 10;
-                reversedNumber = (reversedNumber * 10) + remainder;
-                odometer /= 10;
+                Console.WriteLine();
+                Console.WriteLine(bil.PrintCarDetails()); 
             }
 
-            return originalNumber == reversedNumber;
+
+
+
+            Console.WriteLine("\nTilbage til hovedmenu...");
+            Console.ReadKey();
         }
 
-       
 
-            /*
+        public void OdometerPalindrome()                                /* Er odometeren en Palindrome?  - FIKSET */
+        {
 
-            Console.WriteLine("Angiv brændstofpris i kr: ");
-            prisPerLiter = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Indast nummerplade:");
+            string nrplade = Console.ReadLine();
+            Car foundCar = bilRegister.FirstOrDefault(bil => bil.Nummerplade == nrplade);
 
-            newTrip.CalculateTripPrice(distance, prisPerLiter);        //Calculate Trip Price
+            
+            if (foundCar != null)
+                {
+                    Console.WriteLine($"Odometer = {foundCar.Odometer}");
+                    Console.WriteLine($"Odometer er en palindrome = {foundCar.Palindrome(foundCar.Odometer)}");
+                }
+            else 
+                {
+                    Console.WriteLine("Registreringsnummer ikke fundet!!!");
+                }
 
-            bil1.PrintCarDetails();      //Udskriv bilens oplysninger i konsollen
-
-
-
-
-            //Trip trip1 = trips[0];        //initialisering af elementen i position 0 i listen
-            Console.WriteLine();
-            //trips[1].PrintTripDetails();    //Udskriv turens oplysninger i konsollen   
-            newTrip.PrintTripDetails();     // Hvis man kender til den specifikke tur...ellers bruger man indeks
-
-
+            Console.WriteLine("\nTilbage til hovedmenu...");
             Console.ReadKey();
 
+        }
 
+        public string HeadPrintCarDetails()
+        {
 
-        */
-        
+            return "Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
+                   "\n--------------- | --------------- | --------------- | --------------- | ---------------";
+        }
+
+        public string HeadPrintTripDetails()
+        {
+            return
+               "Køreturdetaljere:" + "\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) +
+               "\n--------------- | --------------- | --------------- | --------------- | ---------------";
+        }
+
     }
 }
 

@@ -17,70 +17,19 @@ namespace CarApp
         private double _tripPrice;
         private double _literPrice;
 
-        public double Distance                                                                  //GETTER SETTER FOR EACH PROPERTIES
-        {
-            get
-            {
-                return _distance;
-            }
-            set
-            {
-                if (value > 0)
-                {
-                    _distance = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
+        public double Distance { get { return _distance; } set { _distance = value; } }                                                                 //GETTER SETTER FOR EACH PROPERTIES
 
-        public DateTime TripDate
-        {
-            get
-            {
-                return _tripDate;
-            }
-            set
-            {
-                if (value == DateTime.Now.Date)
-                {
-                    _tripDate = DateTime.Now.Date;
-                }
-            }
-        }
 
-        public DateTime StartTime
-        {
-            get
-            {
-                return _startTime;
-            }
-            set
-            {
-                if (value >= DateTime.Now)
-                {
-                    _startTime = DateTime.Now;
-                }
-            }
-        }
+        public DateTime TripDate { get { return _tripDate; } set { _tripDate = value; } }
+        
 
-        public DateTime EndTime
-        {
-            get
-            {
-                return _endTime;
-            }
-            set
-            {
-                if (value >= DateTime.Now)
-                {
-                    _endTime = value;
-                }
-            }
-        }
+        public DateTime StartTime { get { return _startTime; } set { _startTime = value; } }
+
+
+        public DateTime EndTime { get { return _endTime; } set { _endTime = value; } }
+
         public double TripPrice { get { return _tripPrice; } set { _tripPrice = value; } }
+
         public double LiterPrice { get { return _literPrice; } set { _literPrice = value; } }
 
 
@@ -91,16 +40,16 @@ namespace CarApp
 
         public Trip(double distance, DateTime tripDate, DateTime startTime, DateTime endTime)           //CONSTRUCTOR
         {
-            double Distance = distance;
-            DateTime TripDate = tripDate;
-            DateTime StartTime = startTime;
-            DateTime EndTime = endTime;
+            Distance = distance;
+            TripDate = tripDate;
+            StartTime = startTime;
+            EndTime = endTime;
         }
 
 
         public TimeSpan TripDuration()                                                      //metode for afregning af turens varighed
         {
-            return _endTime - _startTime;
+            return EndTime - StartTime;
         }
 
 
@@ -114,7 +63,7 @@ namespace CarApp
                     throw new DivideByZeroException("Invalid indtastning");
                 }
 
-                double FuelUsed = _distance / kmPerLiter;
+                double FuelUsed = Distance / kmPerLiter;
                 return FuelUsed;
 
 
@@ -141,8 +90,8 @@ namespace CarApp
                 {
                     throw new DivideByZeroException("Invalid indtastning");
                 }
-                    _tripPrice = (_distance / kmPerLiter) * literPrice;
-                    return _tripPrice;
+                    TripPrice = (Distance / kmPerLiter) * literPrice;
+                    return TripPrice;
 
                 /* en anden måde at lave en afregning med afrundning til 2 decimaler
                 double tripPrice = Math.Round(((_distance / kmPerLiter) * literPrice), 2);     //rounded to 2 decimals     */
@@ -166,7 +115,16 @@ namespace CarApp
 
         public string PrintTripDetails()                                                    // metode for at printe alle turens detaljer
         {
-            return $"Køreturdetaljere: " + _distance.ToString() + " - " + _tripDate.ToString() + " - " + _startTime.ToString() + " - " + _endTime.ToString() + "-" + TripDuration();
+            return 
+                "Køreturdetaljere:" + "\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) +
+                 $"\n{Distance.ToString().PadRight(15)}  | {TripDate.ToShortDateString().PadRight(15)} | { StartTime.ToShortTimeString().PadRight(15)} | { EndTime.ToShortTimeString().PadRight(15)}" ;
         }
+
+        /*public string HeadPrintTripDetails()
+        {
+            return
+               "Køreturdetaljere:" + "\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) + 
+               "\n--------------- | --------------- | --------------- | --------------- | ---------------";
+        }   */
     }
 }

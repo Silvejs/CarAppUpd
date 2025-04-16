@@ -44,7 +44,7 @@ namespace CarApp
                         EntryPoint.TilføjKøretur();
                         break;
                     case "4":
-                        EntryPoint.PrintBilregister();
+                        EntryPoint.PrintKøretur();
                         break;
                     case "5":
                         EntryPoint.PrintBilregister();

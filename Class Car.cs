@@ -24,7 +24,6 @@ namespace CarApp
         private double _kmPerLiter; 
         private double _fuelUsed;
         private double _literPrice;
-        private List<Car> bilRegister;
         private string _nummerplade;
         private string _date;
 
@@ -35,103 +34,21 @@ namespace CarApp
 
 
 
-        public string Brand                                      // getter setter for BRAND property
-        {
-            get { return _brand; }
-            set
-            {
-                if (!string.IsNullOrWhiteSpace(value))
-                {
-                    _brand = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
+        public string Brand { get { return _brand; } set { _brand = value;}}
 
-        }
+        public string Model { get { return _model; } set { _model = value; } }        // getter setter for MODEL property
+       
 
-        public string Model         // getter setter for MODEL property
-        {
-            get { return _model; }
-            set
-            {
-                if (!string.IsNullOrWhiteSpace(value))      // ! = NOT ...meaning that if is null or white space 
-                                                            // needs to be false for the VARIABEL to get a value
-                {
-                    _model = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
+        public int Årgang { get { return _årgang; } set { _årgang = value; } }            // getter setter for YEAR property
+       
 
-        public int Årgang             // getter setter for YEAR property
-        {
-            get { return _årgang; }
-            set
-            {
-                if (value > 0)
-                {
-                    _årgang = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
+        public int Odometer { get { return _odometer; } set { _odometer = value; } }                                // getter setter for MILEAGE property
 
-        public int Odometer                                 // getter setter for MILEAGE property
-        {
-            get { return _odometer; }
-            set
-            {
-                if (value > 0)
-                {
-                    _odometer = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
 
-        public double Distance                              // getter setter for DISTANCE property
-        {
-            get { return _distance; }
-            set
-            {
-                if (value > 0)
-                {
-                    _distance = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
+        public double Distance { get { return _distance; } set { _distance = value; } }                            // getter setter for DISTANCE property
 
-        public bool IsEngineOn                              //bool IsEngineOn property
-        {
-            get { return _isEngineOn; }
-            set
-            {
-                if (!_isEngineOn == true)
-                {
-                    _isEngineOn = value;
-                }
-                else
-                {
-                    Console.WriteLine("Start Engine");
-                }
-            }
-        }
+
+        public bool IsEngineOn { get { return _isEngineOn; } set { _isEngineOn = value; } }                              //bool IsEngineOn property
 
         public double KmPerLiter { get {return _kmPerLiter;} set {_kmPerLiter = value; } }
 
@@ -159,43 +76,38 @@ namespace CarApp
             Odometer = odometer;
             KmPerLiter = kmPerLiter;
             _trips = new List<Trip>();
-            _fuelType = fuelType;
-            _gearType = gearType;
-            _nummerplade = nummerplade;
+            FuelType = fuelType;
+            GearType = gearType;
+            Nummerplade = nummerplade;
 
         }
 
 
 
-
-        public void Drive()
-        {
-            if (!IsEngineOn)
-            {
-                Console.WriteLine("Tænd bilen");
-            }
-            else
-            {
-                Odometer += Convert.ToInt32(Distance);
-                Console.WriteLine("Opdateret odometer: {0}", Odometer);
-            }
-
-        }              //Opdaterer odometer med den nye angivet trip 
-
+       
                                         
         public string PrintCarDetails()                                     //Print Car Details i consollen -> nu med opdateret kilometer tal
         {
 
-            return $"Nummerplade".PadRight(15) + "|" +  "Brand".PadRight(15) + "|" + "Model".PadRight(15) + "|" + "Year".PadRight(15) + "|" + "Mileage".PadRight(15) + "|" + "Km/L".PadRight(15) + "Brændstof".PadRight(15) + "Gear".PadLeft(15) +
-                   $"\n---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------" +
-                   $"\n{Nummerplade.PadRight(15)} + {Brand.PadRight(15)}  |  {Model.PadRight(15)} | {Årgang.ToString().PadRight(15)} | {Odometer.ToString().PadRight(15)} | {KmPerLiter.ToString().PadRight(15)} | {FuelType.ToString().PadRight(15)} | {GearType.ToString().PadLeft(15)}";
+            return $"{Brand.PadRight(15)} | {Model.PadRight(15)} | {Årgang.ToString().PadRight(15)} | {Odometer.ToString().PadRight(15)} | {Nummerplade.PadRight(15)} | ";
+                   
+                   
        
         }
+
+        /*public string HeadPrintCarDetails()                               //Den skal være i Car Class
+        {
+
+            return "Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
+                   "\n--------------- | --------------- | --------------- | --------------- | ---------------";
+        }*/
+            
+
 
 
         public void Drive(Trip newTrip)
         {
-            if (!IsEngineOn)
+            if (true)
             { 
                 Odometer += (int)newTrip.Distance;
                 _trips.Add(newTrip);
@@ -211,7 +123,7 @@ namespace CarApp
 
         public List<Trip> PrintAllTrips()
         {
-            return new List<Trip>(_trips);
+            return _trips;
 
 
 
@@ -247,20 +159,20 @@ namespace CarApp
         }
 
 
-        public bool Palindrome()                                /* Er odometeren en Palindrome? */
+        public bool Palindrome(int odometer)                                /* Er odometeren en Palindrome? */
         {
-            _odometer = Odometer;
-            int originalNumber = Odometer;
-            int remainder, reversedNumber = 0;
+            Odometer = odometer;
+            int remainder;
+            int reversedNumber = 0 ;
 
-            while (Odometer > 0)
+            if (Odometer > 0)
             {
-                remainder = Odometer % 10;
-                reversedNumber = (reversedNumber * 10) + remainder;
-                Odometer /= 10;
+                remainder = odometer % 10;
+                reversedNumber = reversedNumber * 10 + remainder;
+                odometer /= 10;
             }
 
-            return originalNumber == reversedNumber;
+            return odometer == reversedNumber;
         }
 
     }
