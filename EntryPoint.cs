@@ -242,7 +242,7 @@ namespace CarApp
                             
                             var trips = car.PrintAllTrips();
                             Console.WriteLine("\nIndtast dato for at se alle køreturer på dagen (ÅÅÅÅ-MM-DD): ");
-                            DateOnly date = DateOnly.Parse(Console.ReadLine());
+                            DateOnly date = DateOnly.Parse(Console.ReadLine(), null);
 
 
                             //string date = Console.ReadLine();
