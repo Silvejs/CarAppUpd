@@ -174,11 +174,11 @@ namespace CarApp
             int remainder;
             int reversedNumber = 0;
 
-            while (odometer > 0)
+            while (Odometer > 0)
             {
-                remainder = odometer % 10;
+                remainder = Odometer % 10;
                 reversedNumber = reversedNumber * 10 + remainder;
-                odometer /= 10;
+                Odometer /= 10;
             }
 
             return odometer == reversedNumber;
