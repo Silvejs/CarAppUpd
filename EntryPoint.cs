@@ -187,12 +187,15 @@ namespace CarApp
                 
                 
 
-                string input = Console.ReadLine();
+                
                 Console.WriteLine("1.Udskiv alle kørerturer for en registreret bil");
                 Console.WriteLine("2.Udskirv køreturer for en registreret bil fra en udvalgt dato");
                 Console.WriteLine("3.Tilbage til hovedmenu");
+                string input = Console.ReadLine();
 
-               switch (input)
+
+
+                switch (input)
                 {
                     case ("1"):
 
@@ -348,8 +351,9 @@ namespace CarApp
         public string HeadPrintTripDetails()
         {
             return
-               "Køreturdetaljere:" + "\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) +
-               "\n--------------- | --------------- | --------------- | --------------- | ---------------";
+               $"Køreturdetaljere:" + 
+               $"\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) +
+               $"\n--------------- | --------------- | --------------- | --------------- | ---------------";
         }
 
     }
