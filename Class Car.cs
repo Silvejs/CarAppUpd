@@ -138,16 +138,16 @@ namespace CarApp
         }
 
 
-        public List<Trip> GetTripsByDate()                       //vi arbejder med TRIP klassen derfor er datatypen i metoden LIST
+        public List<Trip> GetTripsByDate(string date)                       //vi arbejder med TRIP klassen derfor er datatypen i metoden LIST
         {
             List<Trip> tripsByDate = new List<Trip>();              //instansieriser en nye liste for at gemme de ture med den angivne dato
 
-            Date = Convert.ToDateTime(Date).ToShortDateString();    //instansieriser = husk at convertere til dato
+                
 
 
             foreach (Trip trip in _trips)                           //foreach loop for at tjekke hver trip om den indeholder datoen
             {
-                if (trip.TripDate.ToShortDateString() == Date)
+                if (trip.TripDate.ToShortDateString() == date)
                 {
                     tripsByDate.Add(trip);                          //gem turen til en anden liste
                 }

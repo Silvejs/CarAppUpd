@@ -239,20 +239,33 @@ namespace CarApp
                         foreach (var car in foundCarsTrips)
 
                         {
-
+                            
+                            var trips = car.PrintAllTrips();
                             Console.WriteLine("\nIndtast dato for at se alle køreturer på dagen (ÅÅÅÅ-MM-DD): ");
-                            string date = Console.ReadLine();
-                            
-                            
-                            List<Trip> trips = car.GetTripsByDate();
-                           //List<Trip> tripsByDate = trips.Where(p => p.TripDate == date).ToList();
+                            DateOnly date = DateOnly.Parse(Console.ReadLine());
+
+
+                            //string date = Console.ReadLine();
+
+                            //  List<Trip> tripsByDate = trips.Where(p => p.TripDate == date).ToList();
+
+
+
 
 
                             foreach (var trip in trips)
                             {
-                                Console.WriteLine(trip.PrintTripDetails());
-                            }
+                                 if (trip.TripDate.ToShortDateString() == date.ToShortDateString())
+                                    {
+                                        Console.WriteLine(trip.PrintTripDetails());
+                                    }
 
+                                 else if (trip.TripDate.ToShortDateString() != date.ToShortDateString())
+                                    {
+                                        Console.WriteLine("Ingen køreturer fundet den udvalgt dato!");
+                                    }
+                            }
+                            
                             
                         }
 

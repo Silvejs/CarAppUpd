@@ -115,8 +115,10 @@ namespace CarApp
 
         public string PrintTripDetails()                                                    // metode for at printe alle turens detaljer
         {
-            return "Køreturdetaljere:" + "\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) +
-                    $"\n{Distance.ToString().PadRight(15)}  | {TripDate.ToShortDateString().PadRight(15)} | { StartTime.ToShortTimeString().PadRight(15)} | { EndTime.ToShortTimeString().PadRight(15)}" ;
+            return  $"Køreturdetaljere:" + 
+                    $"\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) +
+                    $"\n{Distance.ToString().PadRight(15)}  | {TripDate.ToShortDateString().PadRight(15)} | {StartTime.ToShortTimeString().PadRight(15)} | {EndTime.ToShortTimeString().PadRight(15)} | {TripDuration().ToString().PadRight(15)}";
+            ;
         }
 
         /*public string HeadPrintTripDetails()
