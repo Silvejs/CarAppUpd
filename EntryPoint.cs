@@ -164,6 +164,7 @@ namespace CarApp
             Console.WriteLine($"\nKøretur tilføjet til registreringsnummer: {nrplade}");
 
             Console.WriteLine();
+            Console.WriteLine(køretur.HeadPrintTripDetails());
             Console.WriteLine(køretur.PrintTripDetails());
 
             Console.WriteLine();
@@ -207,10 +208,10 @@ namespace CarApp
                         List<Car> foundCar = bilRegister.Where(p => p.Nummerplade == nrplade).ToList();
                         Console.WriteLine();
 
-
+                        Console.WriteLine(HeadPrintTripDetails());
                         foreach (var car in foundCar)
                         {
-                           
+                            
                             var trips = car.PrintAllTrips();
                             foreach (var trip in trips)
                             { 
@@ -255,7 +256,7 @@ namespace CarApp
 
 
 
-
+                            Console.WriteLine(HeadPrintTripDetails());
                             foreach (var trip in trips)
                             {
                                  if (trip.TripDate.ToShortDateString() == date.ToShortDateString())
@@ -306,7 +307,6 @@ namespace CarApp
 
             foreach (var bil in bilRegister) 
             {
-                Console.WriteLine();
                 Console.WriteLine(bil.PrintCarDetails()); 
             }
 
