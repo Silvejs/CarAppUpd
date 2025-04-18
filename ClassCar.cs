@@ -22,7 +22,7 @@ namespace CarApp
         private FuelType _fuelType;
         private List<Trip> _trips;
         private GearType _gearType;
-<<<<<<< HEAD
+
         private double _kmPerLiter; 
         private double _fuelUsed;
         private double _literPrice;
@@ -30,121 +30,12 @@ namespace CarApp
         private string _date;
 
 
-=======
-        private double _kmPerLiter;
-        private double _fuelUsed;
-        private double _literPrice;
->>>>>>> main
 
-
-
-
-
-<<<<<<< HEAD
 
         public string Brand { get { return _brand; } set { _brand = value;}}
 
         public string Model { get { return _model; } set { _model = value; } }        // getter setter for MODEL property
        
-=======
-        }
-        public string Model         // getter setter for MODEL property
-        {
-            get { return _model; }
-            set
-            {
-                if (!string.IsNullOrWhiteSpace(value))      // ! = NOT ...meaning that if is null or white space 
-                                                            // needs to be false for the VARIABEL to get a value
-                {
-                    _model = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
-        public int Year             // getter setter for YEAR property
-        {
-            get { return _year; }
-            set
-            {
-                if (value > 0)
-                {
-                    _year = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
-        public int Odometer          // getter setter for MILEAGE property
-        {
-            get { return _odometer; }
-            set
-            {
-                if (value > 0)
-                {
-                    _odometer = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
-        public double FuelConsumption           //getter setter for FUEL COMSPUMPTION  property
-        {
-            get { return _fuelConsumption; }
-            set
-            {
-                if (value > 0)
-                {
-                    _fuelConsumption = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
-        public double Distance             // getter setter for DISTANCE property
-        {
-            get { return _distance; }
-            set
-            {
-                if (value > 0)
-                {
-                    _distance = value;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid typing!");
-                }
-            }
-        }
-        public bool IsEngineOn          //bool isengineon property
-        {
-            get { return _isEngineOn; }
-            set
-            {
-                if (!_isEngineOn == true)
-                {
-                    _isEngineOn = value;
-                }
-                else
-                {
-                    Console.WriteLine("Start Engine");
-                }
-            }
-        }
-        public double KmPerLiter  { get { return _kmPerLiter; } set { _kmPerLiter = value;  } }
-        public double FuelUsed { get { return _fuelUsed; } set { _fuelUsed = value; } }
-        public double LiterPrice { get { return _literPrice; } set { _literPrice = value; } }
-
-
->>>>>>> main
 
         public int Årgang { get { return _årgang; } set { _årgang = value; } }            // getter setter for YEAR property
        
@@ -183,42 +74,16 @@ namespace CarApp
             Odometer = odometer;
             KmPerLiter = kmPerLiter;
             _trips = new List<Trip>();
-<<<<<<< HEAD
             FuelType = fuelType;
             GearType = gearType;
             Nummerplade = nummerplade;
-=======
-            _fuelType = fuelType;
-            _gearType = gearType;
 
         }
 
 
-        //Opdaterer odometer med den nye angivet trip 
-        //public void Drive()
-        //{
-         //   if (!IsEngineOn)
-          //  {
-           //     Console.WriteLine("Tænd bilen");
-           // }
-           // else
-          //  {
-         //       Odometer += Convert.ToInt32(Distance);
-        //    }
->>>>>>> main
-
-      //  }
-
-
-
-<<<<<<< HEAD
-       
                                         
         public string PrintCarDetails()                                     //Print Car Details i consollen -> nu med opdateret kilometer tal
-=======
-        //Print Car Details i consollen -> nu med opdateret kilometer tal
-        public void PrintCarDetails()
->>>>>>> main
+
         {
 
             return $"{Brand.PadRight(15)} | {Model.PadRight(15)} | {Årgang.ToString().PadRight(15)} | {Odometer.ToString().PadRight(15)} | {Nummerplade.PadRight(15)} | ";
@@ -227,18 +92,7 @@ namespace CarApp
        
         }
 
-        /*public string HeadPrintCarDetails()                               //Den skal være i Car Class
-        {
 
-<<<<<<< HEAD
-            return "Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
-                   "\n--------------- | --------------- | --------------- | --------------- | ---------------";
-        }*/
-            
-
-
-
-=======
         public double CalculateFuelUsed()
         {
             if (KmPerLiter <= 0)
@@ -263,7 +117,7 @@ namespace CarApp
         }
 
 
->>>>>>> main
+
         public void Drive(Trip newTrip)
         {
             if (true)
@@ -290,7 +144,7 @@ namespace CarApp
             //{
             //    Console.WriteLine(trip.PrintTripDetails());       //Skriv parametre som skal udskrives i consolen ift TRIP
             //}
-<<<<<<< HEAD
+
         
 
         //GetTripsByDate-metoden skal gennemgå alle Trip-objekter og finde de ture, der blev gennemført på en specifik dato.
@@ -335,64 +189,7 @@ namespace CarApp
             return odometer == reversedNumber;
         }
 
-=======
-        }
 
-
-        public void Drive1(Trip newTrip)
-        {
-            if (!IsEngineOn)
-            { 
-                Odometer += (int)newTrip.Distance;
-                double tripPrice = CalculateTripPrice();
-            }
-
-
-            //Drive-metoden vil være ansvarlig for
-            //      at kontrollere om motoren er tændt,
-            //      beregne brændstofforbrug og turpris, og
-            //      opdatere bilens kilometerstand (Odometer).
-            //Denne metode kan ligge i Car-klassen, mens den tager oplysninger fra Trip-objektet som parameter.
-        }
-
-
-
-        //GetTripsByDate-metoden skal gennemgå alle Trip-objekter og finde de ture, der blev gennemført på en specifik dato.
-        //Denne metode skal ligge i Car-klassen og benytte et loop til at søge gennem alle ture.
-
-        public List<Trip> GetTripsByDate(string date)       //vi arbejder med TRIP klassen derfor er datatypen i metoden LIST
-        {
-            List<Trip> tripsByDate = new List<Trip>();      //instansieriser en nye liste for at gemme de ture med den angivne dato
-
-            date = Convert.ToDateTime(date).ToShortDateString();    //instansieriser = husk at convertere til dato
-
-
-            foreach (Trip trip in _trips)                           //foreach loop for at tjekke hver trip om den indeholder datoen
-            {
-                if (trip.TripDate.ToShortDateString() == date)
-                {
-                    tripsByDate.Add(trip);                          //gem turen til en anden liste
-                }
-
-            }
-
-            return tripsByDate;                                     //returner en liste med datoerne når metoden er kaldt ud i MAIN
-
-        }
-
-
-        
-
-
-
-    }
-    public enum FuelType        // enum for Fuel Type
-    {
-             BENZIN,                        // find en løsning til at sætte alle bogstaver TO LOWER og den førstebogstav til TO UPPER...
-             Diesel,
-             Hybrid,
-             Elektrisk
->>>>>>> main
     }
 
 
@@ -410,7 +207,7 @@ namespace CarApp
         MANUAL
     }
 
-//  OPGAVE 6 
+
 
 
 }
