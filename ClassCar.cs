@@ -22,7 +22,10 @@ namespace CarApp
         private FuelType _fuelType;
         private List<Trip> _trips;
         private GearType _gearType;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 51a91ce300191638d73661f8db1566fd02667082
         private double _kmPerLiter; 
         private double _fuelUsed;
         private double _literPrice;
@@ -32,6 +35,13 @@ namespace CarApp
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 51a91ce300191638d73661f8db1566fd02667082
         public string Brand { get { return _brand; } set { _brand = value;}}
 
         public string Model { get { return _model; } set { _model = value; } }        // getter setter for MODEL property
@@ -78,12 +88,22 @@ namespace CarApp
             GearType = gearType;
             Nummerplade = nummerplade;
 
+<<<<<<< HEAD
         }
 
 
                                         
         public string PrintCarDetails()                                     //Print Car Details i consollen -> nu med opdateret kilometer tal
 
+=======
+      //  }
+
+
+
+       
+                                        
+        public string PrintCarDetails()                                     //Print Car Details i consollen -> nu med opdateret kilometer tal
+>>>>>>> 51a91ce300191638d73661f8db1566fd02667082
         {
 
             return $"{Brand.PadRight(15)} | {Model.PadRight(15)} | {Årgang.ToString().PadRight(15)} | {Odometer.ToString().PadRight(15)} | {Nummerplade.PadRight(15)} | ";
@@ -93,6 +113,7 @@ namespace CarApp
         }
 
 
+<<<<<<< HEAD
         public double CalculateFuelUsed()
         {
             if (KmPerLiter <= 0)
@@ -115,6 +136,12 @@ namespace CarApp
            
             //Console.WriteLine("Total pris for en køretur på {0} er {1} kr", distance, tripPrice);
         }
+=======
+            return "Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
+                   "\n--------------- | --------------- | --------------- | --------------- | ---------------";
+        }*/
+            
+>>>>>>> 51a91ce300191638d73661f8db1566fd02667082
 
 
 
@@ -144,7 +171,10 @@ namespace CarApp
             //{
             //    Console.WriteLine(trip.PrintTripDetails());       //Skriv parametre som skal udskrives i consolen ift TRIP
             //}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 51a91ce300191638d73661f8db1566fd02667082
         
 
         //GetTripsByDate-metoden skal gennemgå alle Trip-objekter og finde de ture, der blev gennemført på en specifik dato.
@@ -189,7 +219,10 @@ namespace CarApp
             return odometer == reversedNumber;
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 51a91ce300191638d73661f8db1566fd02667082
     }
 
 

@@ -123,7 +123,6 @@ namespace CarApp
 
         /*public string HeadPrintTripDetails()
         {
-<<<<<<< HEAD
             return
                "Køreturdetaljere:" + "\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) + 
                "\n--------------- | --------------- | --------------- | --------------- | ---------------";
