@@ -123,44 +123,9 @@ namespace CarApp
 
         /*public string HeadPrintTripDetails()
         {
-<<<<<<< HEAD
             return
                "Køreturdetaljere:" + "\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) + 
                "\n--------------- | --------------- | --------------- | --------------- | ---------------";
         }   */
-=======
-            double Distance = distance;
-            DateTime TripDate = tripDate;
-            DateTime StartTime = startTime;
-            DateTime EndTime = endTime;
-        }
-
-
-        public TimeSpan TripDuration()         //metode for afregning af turens varighed
-        {
-            return EndTime - StartTime;
-        }
-
-
-
-        public double CalculateFuelUsed(double kmPerLiter)          //metode for afregning af brugt mængde brændstoff under turen 
-        {
-            double tripFuelUsed = Distance / kmPerLiter;
-            return tripFuelUsed;
-        }
-
-
-
-        public double CalculateTripPrice(double literPrice, double kmPerLiter)      //metode for afregning af turens omkostning
-        {
-
-            return (Distance / kmPerLiter) * literPrice;
-        }
-
-        public void PrintTripDetails()      // metode for at printe alle turens detaljer
-        {
-            Console.WriteLine("Køreturdetaljere; " + _distance.ToString() + " - " + TripDate.ToShortDateString() + " - " + StartTime.ToShortDateString() + " - " + EndTime.ToShortDateString());
-        }
->>>>>>> main
     }
 }
