@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,17 +73,13 @@ namespace CarApp
             Årgang = årgang;
             Odometer = odometer;
             KmPerLiter = kmPerLiter;
-            _trips = new List<Trip>();
             FuelType = fuelType;
             GearType = gearType;
             Nummerplade = nummerplade;
-
+            _trips = new List<Trip>();
         }
 
-
-
-
-
+      
 
         public double CalculateFuelUsed()
         {
@@ -203,6 +200,46 @@ namespace CarApp
                    "\n--------------- | --------------- | --------------- | --------------- | ---------------";
         }
 
+
+        public static FuelType ParseFuelType(string navn)
+        {
+            return Enum.Parse<FuelType>(navn);
+        }
+
+        public static GearType ParseGearType(string navn)
+        {
+            return Enum.Parse<GearType>(navn);
+        }
+
+
+
+
+
+
+
+        public override string ToString()
+        {
+            return $"Biloplysninger - {Brand} - {Model} - {Årgang.ToString()} - {Odometer.ToString()} - {KmPerLiter} -{FuelType} - {GearType} -  {Nummerplade}";
+        }
+
+        public static Car FromString(string data)
+        {
+            string[] parts = data.Split('-');
+
+            string brand = parts[0];
+            string model = parts[1];
+            int årgang = int.Parse(parts[2]);
+            int odometer = int.Parse(parts[3]);
+            double kmPerLiter = double.Parse(parts[4]);
+            FuelType fuelType = ParseFuelType(parts[5]);                   /* der skal laves 2 metoder for at kunne Parse en ENUM til en string */
+            GearType gearType = ParseGearType(parts[6]);
+            string nummerplade = parts[7];
+
+
+            Car bil = new Car(brand, model, årgang, odometer, kmPerLiter, fuelType, gearType, nummerplade);
+            return bil ;
+
+        }
 
     }
 

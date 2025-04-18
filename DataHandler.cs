@@ -9,6 +9,9 @@ namespace CarAppUpd
     public class DataHandler        /* DataHandler Class for at får overblik over Filhåndtering - StreamWriter og StreamReader */
     {
 
+
+
+
          
 
     }
