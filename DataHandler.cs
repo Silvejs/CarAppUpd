@@ -40,7 +40,27 @@ namespace CarAppUpd
             }
         }
 
-        
+        public void SaveCar(Car car)                        /*FRA OPGAVESÆTET UGE 7 - EXCEPTIONS*/
+        {
+            StreamWriter writer = null;                                     // USING mangler her....hvorfor ???
+            try
+            {
+                writer = new StreamWriter(FilePathCars, append: true);
+                writer.WriteLine(car.ToString());
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"Fejl under skrivning: {ex.Message}");
+            }
+            finally
+            {
+                writer?.Close();                                            //hvorfor ? - hvad laver Close funktionen
+                Console.WriteLine("Ressource frigivet.");
+            }
+        }
+
+
+
         public List<Car> LoadCars()                                 // Metode til at indlæse en liste af medarbejdere fra en fil
         {
             List<Car> cars = new List<Car>();
@@ -59,6 +79,44 @@ namespace CarAppUpd
 
             return cars;                                                    // Returnerer listen af medarbejdere
         }
+
+        public List<Car> LoadCarsWithExcep()
+        {
+            List<Car> cars = new List<Car>();
+            StreamReader reader = null;
+            try
+            {
+                reader = new StreamReader(FilePathCars);
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+
+                    Car car = Car.FromString(line);                         // Assuming Car has a static FromString method or constructor
+                    cars.Add(car);
+                }
+
+            }
+            catch (FileNotFoundException fnf)
+            {
+                Console.WriteLine("Fil er ikke til at findes!!!");
+                Console.WriteLine($"Fejl under læsning: {fnf.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fejl under læsning: {ex.Message}");
+            }
+            finally
+            {
+                reader?.Close();
+                Console.WriteLine("File Not Found");
+            }
+            return cars;
+        }
+
+
+
+
+
 
         public void SaveTrips(List<Trip> trips)                          // Metode til at gemme en liste af biler i en fil
         {

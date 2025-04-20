@@ -99,8 +99,6 @@ namespace CarApp
 
 
 
-
-
             }
             catch (DivideByZeroException dpz)                                                /*Exception - Divide  By  Zero*/
             {

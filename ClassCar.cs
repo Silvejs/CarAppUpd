@@ -113,11 +113,31 @@ namespace CarApp
 
         public void Drive(Trip newTrip)
         {
-            if (true)
+            string insFuel = "Tank op nu!!!";
+            try
             {
-                Odometer += (int)newTrip.Distance;
-                _trips.Add(newTrip);
+                if (true)
+                {
+                    Odometer += (int)newTrip.Distance;
+                    _trips.Add(newTrip);
+                }
+                else if (false)
+                {
+                    throw new InsufficientFuelException(insFuel);                   //Custom Exception - inst + handling + finally blok = DIAS VURDERING ?
+                }
             }
+            catch (InsufficientFuelException)
+            {
+                Console.WriteLine("Tank op nu!!!");
+            }
+            finally
+            {
+                Console.WriteLine("Være sikkert at du har nok brændstof!");
+            }
+
+
+
+
 
 
             //Drive-metoden vil være ansvarlig for
@@ -241,6 +261,10 @@ namespace CarApp
 
         }
 
+
+
+
+
     }
 
     public enum FuelType                                                    /* enum for Fuel Type */
@@ -256,6 +280,31 @@ namespace CarApp
         AUTOMATISK,
         MANUAL
     }
+
+
+
+    public class InsufficientFuelException : Exception
+    {
+        
+        /*public InsufficientFuelException()                                                      // Default constructor
+        {
+        }*/
+        
+        public InsufficientFuelException(string message)                                        // Constructor that accepts a custom message
+            : base(message)
+        {
+        }
+
+        
+        /*public InsufficientFuelException(string message, Exception inner)                       // Constructor that accepts a custom message and an inner exception
+            : base(message, inner)
+        {
+        }*/
+
+        
+       // public int ErrorCode { get; set; }                                                       // Optional: Add custom properties if needed
+    }       
+
 
 
 
