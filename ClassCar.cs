@@ -113,7 +113,7 @@ namespace CarApp
 
         public void Drive(Trip newTrip)
         {
-            string insFuel = "Tank op nu!!!";
+            string insFuel = "Tank op!!!";
             try
             {
                 if (true)
@@ -123,12 +123,12 @@ namespace CarApp
                 }
                 else if (false)
                 {
-                    throw new InsufficientFuelException(insFuel);                   //Custom Exception - inst + handling + finally blok = DIAS VURDERING ?
+                    throw new InsufficientFuelException();                   //Custom Exception - inst + handling + finally blok = DIAS VURDERING ?
                 }
             }
-            catch (InsufficientFuelException)
+            catch (InsufficientFuelException insFuel)
             {
-                Console.WriteLine("Tank op nu!!!");
+                Console.WriteLine("Tank op nu!!!", insFuel.Message);
             }
             finally
             {
@@ -290,8 +290,8 @@ namespace CarApp
         {
         }*/
         
-        public InsufficientFuelException(string message)                                        // Constructor that accepts a custom message
-            : base(message)
+        public InsufficientFuelException()                                        // Constructor that accepts a custom message
+            : base()
         {
         }
 
