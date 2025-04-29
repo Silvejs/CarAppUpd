@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using CarAppUpd;
 using Microsoft.VisualBasic.FileIO;
 
 
@@ -23,7 +24,7 @@ namespace CarApp
         List<Car> bilRegister = new List<Car>();
        
 
-        public void TilføjBil()                                             //bruger input - Biloplysninger - FIKSET!!!!
+        public void TilføjBil(DataHandler Cars)                                             //bruger input - Biloplysninger - FIKSET!!!!
                                                                                     
         {
             
@@ -63,8 +64,9 @@ namespace CarApp
             string nummerplade = Console.ReadLine();
 
             Car bil = new Car(brand, model, årgang, odometer, kmPerLiter, fuelType, gearType, nummerplade);
-            bilRegister.Add(bil);   
-            
+            Cars.bilRegister.Add(bil);
+            Cars.SaveCars();
+                        
             
           
             

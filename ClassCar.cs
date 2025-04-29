@@ -62,6 +62,8 @@ namespace CarApp
 
         public string Date { get { return _date; } set { _date = value; } }
 
+        public string FilePathCars { get; set; } = "Cars.txt";
+
 
 
 
@@ -113,7 +115,7 @@ namespace CarApp
 
         public void Drive(Trip newTrip)
         {
-            string insFuel = "Tank op!!!";
+            
             try
             {
                 if (true)
@@ -126,9 +128,9 @@ namespace CarApp
                     throw new InsufficientFuelException();                   //Custom Exception - inst + handling + finally blok = DIAS VURDERING ?
                 }
             }
-            catch (InsufficientFuelException insFuel)
+            catch (InsufficientFuelException ex)
             {
-                Console.WriteLine("Tank op nu!!!", insFuel.Message);
+                Console.WriteLine("Tank op nu!!!", ex.Message);
             }
             finally
             {

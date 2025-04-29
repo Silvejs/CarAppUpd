@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarAppUpd;
 
 namespace CarApp
 {
@@ -15,6 +16,10 @@ namespace CarApp
 
         static void MainMenu()
         {
+            DataHandler CarPark = new DataHandler("Cars.txt", "Trips.txt");
+            CarPark.LoadTrips();
+            CarPark.LoadCars();
+
             Menu EntryPoint = new Menu();
             var bil = new CarApp();
             while (true)
@@ -35,7 +40,7 @@ namespace CarApp
                 switch (choice)
                 {
                     case "1":
-                        EntryPoint.TilføjBil();            
+                        EntryPoint.TilføjBil(CarPark);            
                         break;
                     case "2":
                         EntryPoint.PrintBilOplysninger();

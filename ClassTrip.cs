@@ -33,6 +33,7 @@ namespace CarApp
 
         public double LiterPrice { get { return _literPrice; } set { _literPrice = value; } }
 
+        public string FilePathTrips { get; set; } = "Trips.txt";
 
 
         /*Metoder og Constructor*/

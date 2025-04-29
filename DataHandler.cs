@@ -11,9 +11,10 @@ namespace CarAppUpd
    
 
     {
-        public string FilePathCars { get; set; } // Sti til filen, der gemmer data
-        public string FilePathTrips { get; set; }
-
+        public string FilePathCars { get; set; } = "Cars.txt";// Sti til filen, der gemmer data
+        public string FilePathTrips { get; set; } = "Trips.txt";
+        public List<Car> bilRegister = new List<Car>();
+        public List<Trip> tripsRegister = new List<Trip>();
 
         public DataHandler(string filePathCars, string filePathTrips )
         {
@@ -27,12 +28,12 @@ namespace CarAppUpd
         
 
 
-        public void SaveCars(List<Car> cars)                          // Metode til at gemme en liste af biler i en fil
+        public void SaveCars()                          // Metode til at gemme en liste af biler i en fil
         {
             using (StreamWriter sw = new StreamWriter(FilePathCars))            // Åbner filen til skrivning
             {
                 
-                    foreach (var bil in cars )
+                    foreach (var bil in bilRegister )
                     {
                         sw.WriteLine(bil.ToString());                       // Gemmer hver bil som en linje i filen
                     }
@@ -40,7 +41,7 @@ namespace CarAppUpd
             }
         }
 
-        public void SaveCar(Car car)                        /*FRA OPGAVESÆTET UGE 7 - EXCEPTIONS*/
+        /*public void SaveCar(Car car)                        FRA OPGAVESÆTET UGE 7 - EXCEPTIONS
         {
             StreamWriter writer = null;                                     // USING mangler her....hvorfor ???
             try
@@ -57,7 +58,7 @@ namespace CarAppUpd
                 writer?.Close();                                            //hvorfor ? - hvad laver Close funktionen
                 Console.WriteLine("Ressource frigivet.");
             }
-        }
+        }*/
 
 
 
