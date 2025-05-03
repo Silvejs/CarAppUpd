@@ -18,7 +18,7 @@ namespace CarApp
         {
             DataHandler CarPark = new DataHandler("Cars.txt", "Trips.txt");
             CarPark.LoadTrips();
-            CarPark.LoadCars();
+            CarPark.LoadCarsWithExcep();
 
             Menu EntryPoint = new Menu();
             var bil = new CarApp();
@@ -43,19 +43,19 @@ namespace CarApp
                         EntryPoint.TilføjBil(CarPark);            
                         break;
                     case "2":
-                        EntryPoint.PrintBilOplysninger();
+                        EntryPoint.PrintBilOplysninger(CarPark);
                         break;
                     case "3":
-                        EntryPoint.TilføjKøretur();
+                        EntryPoint.TilføjKøretur(CarPark);
                         break;
                     case "4":
-                        EntryPoint.PrintKøretur();
+                        EntryPoint.PrintKøretur(CarPark);
                         break;
                     case "5":
-                        EntryPoint.PrintBilregister();
+                        EntryPoint.PrintBilregister(CarPark);
                         break;
                     case "6":
-                        EntryPoint.OdometerPalindrome();
+                        EntryPoint.OdometerPalindrome(CarPark);
                         break;
                     case "7":
                         Console.WriteLine("Exiting...");

@@ -5,6 +5,7 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarAppUpd;
 using Microsoft.VisualBasic;
 
 namespace CarApp
@@ -33,35 +34,18 @@ namespace CarApp
 
 
         public string Brand { get { return _brand; } set { _brand = value; } }
-
         public string Model { get { return _model; } set { _model = value; } }        // getter setter for MODEL property
-
-
-        public int Årgang { get { return _årgang; } set { _årgang = value; } }            // getter setter for YEAR property
-
-
+         public int Årgang { get { return _årgang; } set { _årgang = value; } }            // getter setter for YEAR property
         public int Odometer { get { return _odometer; } set { _odometer = value; } }                                // getter setter for MILEAGE property
-
-
         public double Distance { get { return _distance; } set { _distance = value; } }                            // getter setter for DISTANCE property
-
-
         public bool IsEngineOn { get { return _isEngineOn; } set { _isEngineOn = value; } }                              //bool IsEngineOn property
-
         public double KmPerLiter { get { return _kmPerLiter; } set { _kmPerLiter = value; } }
-
         public double FuelUsed { get { return _fuelUsed; } set { _fuelUsed = value; } }
-
         public double LiterPrice { get { return _literPrice; } set { _literPrice = value; } }
-
         public FuelType FuelType { get { return _fuelType; } set { _fuelType = value; } }
-
         public GearType GearType { get { return _gearType; } set { _gearType = value; } }
-
         public string Nummerplade { get { return _nummerplade; } set { _nummerplade = value; } }
-
         public string Date { get { return _date; } set { _date = value; } }
-
         public string FilePathCars { get; set; } = "Cars.txt";
 
 
@@ -187,9 +171,9 @@ namespace CarApp
         }
 
 
-        public bool Palindrome(int odometer)                                /* Er odometeren en Palindrome? */
+        public bool Palindrome()                                /* Er odometeren en Palindrome? */
         {
-            odometer = Odometer ;
+            int odometer = Odometer ;
             int remainder;
             int reversedNumber = 0;
 
@@ -209,13 +193,34 @@ namespace CarApp
 
             return $"{Brand.PadRight(15)} | {Model.PadRight(15)} | {Årgang.ToString().PadRight(15)} | {Odometer.ToString().PadRight(15)} | {Nummerplade.PadRight(15)} | ";
 
-
-
         }
-        
-        
-        
-        
+
+
+
+        /*public void PrintCarDetails(DataHandler CarPark)              => den skal være i ENTRYPOINT
+        {
+
+            // Udskriv liste med forespørgsler
+            Console.Clear();
+            Console.WriteLine("=== Bil Detaljere ===");
+            HeadCarDetails();
+            if (CarPark.bilRegister.Count == 0)
+            {
+                Console.WriteLine("Ingen biler er blevet oprettet endnu.");
+            }
+            else
+            {
+                for (int i = 0; i < CarPark.bilRegister.Count; i++)
+                {
+                    //Console.WriteLine($"ID: {forespørgsels.Id} \nNavn: {forespørgsels.Kundenavn} \nTlf: {forespørgsels.Tlf}" +
+                    //$"\nBrætspil: {forespørgsels.Brætspil}  \n-------------------------------");
+                    var car = CarPark.bilRegister[i];
+                    Console.WriteLine($"[{i + 1}] {car.ToString()}");
+                }
+            }
+        }*/
+
+
         public string HeadCarDetails()
         {
             return "Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
@@ -239,10 +244,10 @@ namespace CarApp
 
 
 
-        public override string ToString()
+        public override string ToString()               // - {KmPerLiter.ToString().PadRight(15)} -{FuelType.ToString().PadRight(15)} - {GearType.ToString().PadRight(15)} 
         {
-            return $"Biloplysninger - {Brand} - {Model} - {Årgang.ToString()} - {Odometer.ToString()} - {KmPerLiter} -{FuelType} - {GearType} -  {Nummerplade}";
-        }
+            return $"{Brand.PadRight(15)} - {Model.PadRight(15)} - {Årgang.ToString().PadRight(15)} - {Odometer.ToString().PadRight(15)} -  {Nummerplade.PadRight(15)}";
+        }               
 
         public static Car FromString(string data)
         {
@@ -253,8 +258,8 @@ namespace CarApp
             int årgang = int.Parse(parts[2]);
             int odometer = int.Parse(parts[3]);
             double kmPerLiter = double.Parse(parts[4]);
-            FuelType fuelType = ParseFuelType(parts[5]);                   /* der skal laves 2 metoder for at kunne Parse en ENUM til en string */
-            GearType gearType = ParseGearType(parts[6]);
+            FuelType fuelType = Enum.Parse<FuelType>(parts[5]);                   /* der skal laves 2 metoder for at kunne Parse en ENUM til en string */
+            GearType gearType = Enum.Parse<GearType>(parts[6]);
             string nummerplade = parts[7];
 
 

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +26,7 @@ namespace CarApp
         List<Car> bilRegister = new List<Car>();
        
 
-        public void TilføjBil(DataHandler Cars)                                             //bruger input - Biloplysninger - FIKSET!!!!
+        public void TilføjBil(DataHandler CarPark)                                             //bruger input - Biloplysninger - FIKSET!!!!
                                                                                     
         {
             
@@ -64,20 +66,22 @@ namespace CarApp
             string nummerplade = Console.ReadLine();
 
             Car bil = new Car(brand, model, årgang, odometer, kmPerLiter, fuelType, gearType, nummerplade);
-            Cars.bilRegister.Add(bil);
-            Cars.SaveCars();
+            CarPark.bilRegister.Add(bil);
+            CarPark.SaveCars();
                         
             
           
             
-            Console.WriteLine($"\n{bil.Brand} {bil.Model} er blevet tilføjet bilregistret");
+            Console.WriteLine($"\n{bil.Brand} {bil.Model} {bil.Nummerplade} er blevet tilføjet bilregistret");
             Console.WriteLine();
 
-            //Console.WriteLine($"Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
-            //                $"\n--------------- | --------------- | --------------- | --------------- | ---------------");
-
             Console.WriteLine(HeadPrintCarDetails());
-            Console.WriteLine(bil.PrintCarDetails());
+            //Console.WriteLine(bil.PrintCarDetails());
+            for (int i = 0; i < CarPark.bilRegister.Count; i++)
+            {
+                var car = CarPark.bilRegister[i];
+                Console.WriteLine($"[{i + 1}] {car.ToString()}");
+            }
 
 
 
@@ -88,42 +92,44 @@ namespace CarApp
 
 
 
-        public void PrintBilOplysninger()                                       /* bruger input  - Vælg en bil og print alle oplysninger  -  FIKSET!!!*/
+        public void PrintBilOplysninger(DataHandler CarPark)                                       /* bruger input  - Vælg en bil og print alle oplysninger  -  FIKSET!!!*/
         {
+            
+
             Console.Clear();            
             Console.WriteLine("\nDu har valgt 2. Print bil oplysninger.");
             Console.WriteLine("\nIndtast nummerplade for at se biloplysninger");
 
-            string nrplade = Console.ReadLine();
-            List<Car> foundCar = bilRegister.Where(p => p.Nummerplade == nrplade).ToList();
+            string nrPlade = Console.ReadLine();
+            Car foundCar = CarPark.bilRegister.Find(bil => bil.Nummerplade == nrPlade);
+
+
+            Console.Clear();
+            Console.WriteLine($"=== Bil oplysninger med {nrPlade} ===".PadLeft(50));
+
             Console.WriteLine();
 
-
-            //Console.WriteLine($"Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
-            //                $"\n--------------- | --------------- | --------------- | --------------- | ---------------");
-
-            Console.WriteLine(HeadPrintCarDetails());
-
-            foreach (var bil in foundCar)                                                 
+            if (foundCar == null)
             {
-                if (foundCar != null)
-                {
-                    Console.WriteLine(bil.PrintCarDetails());
-                }
-                else
-                {
-                    Console.WriteLine("\nRegistreringsnummer ikke fundet!");
-                }
+                Console.WriteLine("\nIngen biler er blevet oprettet endnu.");
             }
-            
+            else
+            {
+                Console.WriteLine(HeadPrintCarDetails());
+                Console.WriteLine(foundCar.PrintCarDetails());
+            }
+
+
             Console.WriteLine("\nTilbage til hovedmenu...");
             Console.ReadKey();
+         
+           
         }
 
 
 
 
-        public void TilføjKøretur()                                  //FIKSET?       /*TODO - Tilføj ny køretur, med dato, starttidspunkt og sluttidspunkt og tilføjer den til en list*/
+        public void TilføjKøretur(DataHandler CarPark)                                  //FIKSET?       /*TODO - Tilføj ny køretur, med dato, starttidspunkt og sluttidspunkt og tilføjer den til en list*/
                                                                                     /* TJEK OM DET VIRKER ELLER FIND EN LØSNING*/
 
         {
@@ -179,7 +185,7 @@ namespace CarApp
 
 
 
-        public void PrintKøretur()                            //FIKSET??        /*TODO - Find en kåøretur tur som skal printes ud i consolen fx ud fra en dato*/
+        public void PrintKøretur(DataHandler CarPark)                            //FIKSET??        /*TODO - Find en kåøretur tur som skal printes ud i consolen fx ud fra en dato*/
                                                                                 /* Der skal kunne vælges en bestemt tur i tilfældet at der er flere ture med samme dato*/
         {
             Console.Clear();
@@ -297,41 +303,41 @@ namespace CarApp
 
 
 
-        public void PrintBilregister()                                           /*TODO - FIKSET*/
+        public void PrintBilregister(DataHandler CarPark)                                           /*TODO - FIKSET*/
         {
+           // Udskriv liste med biler
             Console.Clear();
-            Console.WriteLine("Du har valgt 5. Print bilregister");
-            //Console.WriteLine($"Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
-            //                  $"\n--------------- | --------------- | --------------- | --------------- | ---------------");
-
-            Console.WriteLine(HeadPrintCarDetails());
-
-
-            foreach (var bil in bilRegister) 
+            Console.WriteLine("=== Bil oversigt ===".PadLeft(50));
+            if (CarPark.bilRegister.Count == 0)
             {
-                Console.WriteLine(bil.PrintCarDetails()); 
+                Console.WriteLine("\nIngen biler er blevet oprettet endnu.");
             }
-
-
-
+            else
+            {
+                Console.WriteLine(HeadPrintCarDetails());
+                for (int i = 0; i < CarPark.bilRegister.Count; i++)
+                {
+                    var car = CarPark.bilRegister[i];
+                    Console.WriteLine($"[{i + 1}] {car.ToString()}");
+                }
+            }
 
             Console.WriteLine("\nTilbage til hovedmenu...");
             Console.ReadKey();
         }
 
 
-        public void OdometerPalindrome()                                /* Er odometeren en Palindrome?  - FIKSET */
+        public void OdometerPalindrome(DataHandler CarPark)                                /* Er odometeren en Palindrome?  - FIKSET */
         {
 
             Console.WriteLine("Indast nummerplade:");
             string nrplade = Console.ReadLine();
-            Car foundCar = bilRegister.FirstOrDefault(bil => bil.Nummerplade == nrplade);
-
+            Car foundCar = CarPark.bilRegister.Find(bil => bil.Nummerplade == nrplade);
             
             if (foundCar != null)
                 {
                     Console.WriteLine($"Odometer = {foundCar.Odometer}");
-                    Console.WriteLine($"Odometer er en palindrome = {foundCar.Palindrome(foundCar.Odometer)}");
+                    Console.WriteLine($"Odometer er en palindrome = {foundCar.Palindrome()}");
                 }
             else 
                 {

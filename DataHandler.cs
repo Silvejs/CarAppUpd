@@ -11,18 +11,20 @@ namespace CarAppUpd
    
 
     {
+     
+
         public string FilePathCars { get; set; } = "Cars.txt";// Sti til filen, der gemmer data
         public string FilePathTrips { get; set; } = "Trips.txt";
         public List<Car> bilRegister = new List<Car>();
         public List<Trip> tripsRegister = new List<Trip>();
 
+
+
         public DataHandler(string filePathCars, string filePathTrips )
         {
-
-
-            FilePathCars = filePathCars; // Sætter filstien ved oprettelse af DataHandler
-            FilePathTrips = filePathTrips;   
-            
+            FilePathCars = filePathCars;
+            FilePathTrips = filePathTrips;
+           
         }
 
         
@@ -30,7 +32,7 @@ namespace CarAppUpd
 
         public void SaveCars()                          // Metode til at gemme en liste af biler i en fil
         {
-            using (StreamWriter sw = new StreamWriter(FilePathCars))            // Åbner filen til skrivning
+            using (StreamWriter sw = new StreamWriter(FilePathCars, true))            // Åbner filen til skrivning
             {
                 
                     foreach (var bil in bilRegister )
@@ -62,7 +64,7 @@ namespace CarAppUpd
 
 
 
-        public List<Car> LoadCars()                                 // Metode til at indlæse en liste af medarbejdere fra en fil
+        /* public List<Car> LoadCars()                                 // Metode til at indlæse en liste af medarbejdere fra en fil
         {
             List<Car> cars = new List<Car>();
 
@@ -79,7 +81,7 @@ namespace CarAppUpd
             }
 
             return cars;                                                    // Returnerer listen af medarbejdere
-        }
+        }*/
 
         public List<Car> LoadCarsWithExcep()
         {
@@ -87,7 +89,7 @@ namespace CarAppUpd
             StreamReader reader = null;
             try
             {
-                reader = new StreamReader(FilePathCars);
+                reader = new StreamReader(FilePathCars, true);
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -121,7 +123,7 @@ namespace CarAppUpd
 
         public void SaveTrips(List<Trip> trips)                          // Metode til at gemme en liste af biler i en fil
         {
-            using (StreamWriter sw = new StreamWriter(FilePathTrips))            // Åbner filen til skrivning
+            using (StreamWriter sw = new StreamWriter(FilePathTrips, true))            // Åbner filen til skrivning
             {
 
                 foreach (var trip in trips)
