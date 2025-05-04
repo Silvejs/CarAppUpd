@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using CarAppUpd;
 
 namespace CarApp
 {
-    internal class CarApp
+    public class CarApp
     {
+       
         static void Main()
         {
             MainMenu();
@@ -16,9 +18,14 @@ namespace CarApp
 
         static void MainMenu()
         {
-            DataHandler CarPark = new DataHandler("Cars.txt", "Trips.txt");
-            CarPark.LoadTrips();
-            CarPark.LoadCarsWithExcep();
+            //public static string projectPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+            //public static string folder = Path.Combine(projectPath, "Data");
+            //public static string FilePathCars = Path.Combine(folder, "Cars.txt");
+            //public static string FilePathTrips = Path.Combine(folder, "Trips.txt");
+
+            DataHandler CarPark = new DataHandler("Cars.txt");
+            //CarPark.LoadTrips();
+            CarPark.LoadCars();
 
             Menu EntryPoint = new Menu();
             var bil = new CarApp();

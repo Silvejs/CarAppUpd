@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
@@ -46,7 +47,6 @@ namespace CarApp
         public GearType GearType { get { return _gearType; } set { _gearType = value; } }
         public string Nummerplade { get { return _nummerplade; } set { _nummerplade = value; } }
         public string Date { get { return _date; } set { _date = value; } }
-        public string FilePathCars { get; set; } = "Cars.txt";
 
 
 
@@ -223,8 +223,8 @@ namespace CarApp
 
         public string HeadCarDetails()
         {
-            return "Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
-                   "\n--------------- | --------------- | --------------- | --------------- | ---------------";
+            return "Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Km/L".PadRight(15) + " | " + "Brændstoff".PadRight(15) + " | " + "Gear type".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
+                   "\n--------------- | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- | ---------------";
         }
 
 
@@ -246,7 +246,7 @@ namespace CarApp
 
         public override string ToString()               // - {KmPerLiter.ToString().PadRight(15)} -{FuelType.ToString().PadRight(15)} - {GearType.ToString().PadRight(15)} 
         {
-            return $"{Brand.PadRight(15)} - {Model.PadRight(15)} - {Årgang.ToString().PadRight(15)} - {Odometer.ToString().PadRight(15)} -  {Nummerplade.PadRight(15)}";
+            return $"{Brand.PadRight(15)} - {Model.PadRight(15)} - {Årgang.ToString().PadRight(15)} - {Odometer.ToString().PadRight(15)} - {KmPerLiter.ToString().PadRight(15)} - {FuelType.ToString().PadRight(15)} -  {GearType.ToString().PadRight(15)}-  {Nummerplade.PadRight(15)}";
         }               
 
         public static Car FromString(string data)
@@ -263,8 +263,8 @@ namespace CarApp
             string nummerplade = parts[7];
 
 
-            Car bil = new Car(brand, model, årgang, odometer, kmPerLiter, fuelType, gearType, nummerplade);
-            return bil ;
+            return new Car(brand, model, årgang, odometer, kmPerLiter, fuelType, gearType, nummerplade);
+           
 
         }
 

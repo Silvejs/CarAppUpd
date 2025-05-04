@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,14 +23,17 @@ namespace CarApp
     {
 
 
-           
         List<Car> bilRegister = new List<Car>();
-       
+        List<Trip> tripsRegister = new List<Trip>();
+        public string FilePathCars = "Cars.txt";
+        public string FilePathTrips = "Trips.txt";
+        
 
         public void TilføjBil(DataHandler CarPark)                                             //bruger input - Biloplysninger - FIKSET!!!!
                                                                                     
         {
             
+
             Console.Clear();
             Console.WriteLine("\nDu har valgt 1.Tilføj ny bil til registret.\nIndtast følgende biloplysninger: ");
                        
@@ -67,15 +71,16 @@ namespace CarApp
 
             Car bil = new Car(brand, model, årgang, odometer, kmPerLiter, fuelType, gearType, nummerplade);
             CarPark.bilRegister.Add(bil);
-            CarPark.SaveCars();
-                        
+            CarPark.SaveCars(); 
             
-          
-            
+
+
+
+
             Console.WriteLine($"\n{bil.Brand} {bil.Model} {bil.Nummerplade} er blevet tilføjet bilregistret");
             Console.WriteLine();
 
-            Console.WriteLine(HeadPrintCarDetails());
+            Console.WriteLine(bil.HeadCarDetails());
             //Console.WriteLine(bil.PrintCarDetails());
             for (int i = 0; i < CarPark.bilRegister.Count; i++)
             {
@@ -115,8 +120,9 @@ namespace CarApp
             }
             else
             {
-                Console.WriteLine(HeadPrintCarDetails());
-                Console.WriteLine(foundCar.PrintCarDetails());
+
+                Console.WriteLine(foundCar.HeadCarDetails());
+                Console.WriteLine(foundCar.ToString());
             }
 
 
@@ -314,7 +320,7 @@ namespace CarApp
             }
             else
             {
-                Console.WriteLine(HeadPrintCarDetails());
+                Console.WriteLine(HeadPrintCarRegister());
                 for (int i = 0; i < CarPark.bilRegister.Count; i++)
                 {
                     var car = CarPark.bilRegister[i];
@@ -349,11 +355,11 @@ namespace CarApp
 
         }
 
-        public string HeadPrintCarDetails()
+        public string HeadPrintCarRegister()
         {
 
-            return "Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
-                   "\n--------------- | --------------- | --------------- | --------------- | ---------------";
+            return "Brand".PadRight(15) + " | " + "Model".PadRight(15) + " | " + "Year".PadRight(15) + " | " + "Odometer".PadRight(15) + " | " + "Km/L".PadRight(15) + " | " + "Brændstoff".PadRight(15) + " | " + "Gear type".PadRight(15) + " | " + "Nummerplade".PadRight(15) + " | " +
+                   "\n--------------- | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- | ---------------";
         }
 
         public string HeadPrintTripDetails()
