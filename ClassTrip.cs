@@ -114,6 +114,12 @@ namespace CarApp
         }
 
 
+        
+        
+        
+        
+        
+        
         public string PrintTripDetails()                                                    // metode for at printe alle turens detaljer
         {
             return  /*$"Køreturdetaljere:" + 
@@ -126,7 +132,7 @@ namespace CarApp
         {
             return
                $"Køreturdetaljere:" +
-               $"\nAfstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) +
+               $"\n Afstand".PadRight(15) + " | " + "Dato".PadRight(15) + " | " + "Starttidspunkt".PadRight(15) + " | " + "Sluttidspunkt".PadRight(15) + " | " + "Trip Duration".PadRight(15) +
                $"\n--------------- | --------------- | --------------- | --------------- | ---------------";
         }
 
@@ -135,7 +141,7 @@ namespace CarApp
 
         public override string ToString()                           //override ad ToString metode så man lave en trip objekt til en streng
         {
-            return $"Tur detaljer : {Distance.ToString()} - {TripDate.ToShortDateString()} - {StartTime.ToShortTimeString} - {EndTime.ToShortTimeString}";
+            return $"{Distance.ToString().PadRight(15)} | {TripDate.ToShortDateString().PadRight(15)} | {StartTime.ToShortTimeString().PadRight(15)} | {EndTime.ToShortTimeString().PadRight(15)}";
         }
 
 
@@ -150,8 +156,8 @@ namespace CarApp
             DateTime startTime = DateTime.Parse(parts[2]);               // Tredje del er køreturens starttidspunkt 
             DateTime endTime = DateTime.Parse(parts[3]);                 // Fjerde del er køreturens sluttidspunkt
 
-            Trip trip = new Trip(distance, tripDate, startTime, endTime);
-            return trip;
+            return new Trip(distance, tripDate, startTime, endTime);
+           
             
         }
 

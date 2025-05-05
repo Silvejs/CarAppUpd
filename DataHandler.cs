@@ -18,17 +18,16 @@ namespace CarAppUpd
         public static string folder = Path.Combine(projectPath, "Data");
         public static string FilePathCars = Path.Combine(folder, "Cars.txt");
         public string FilePath { get; set; }
-        //public static string FilePathTrips = Path.Combine(folder, "Trips.txt");
-
+        public static string FilePathTrips = Path.Combine(folder, "Trips.txt");
         
         public List<Car> bilRegister = new List<Car>();
-        //public List<Trip> tripsRegister = new List<Trip>();
-
+        public List<Trip> tripsRegister = new List<Trip>();
+        
 
 
         public DataHandler(string? filePathCars= null)
         {
-            FilePath = filePathCars ?? FilePathCars;
+            FilePath= filePathCars ?? FilePathCars ?? FilePathTrips;
 
 
             // Create directory if it doesn't exist
@@ -43,7 +42,7 @@ namespace CarAppUpd
             {
                 // Create an empty txt 
                 File.WriteAllText(FilePath, "Cars.txt");
-
+                File.WriteAllText(FilePath, "Trips.txt");
             }
 
            
@@ -69,7 +68,8 @@ namespace CarAppUpd
 
         /*public void SaveCar(Car car)                        FRA OPGAVESÆTET UGE 7 - EXCEPTIONS
         {
-            StreamWriter writer = null;                                     // USING mangler her....hvorfor ???
+            StreamWriter writer = null;                                     // USING mangler her - det er en anden måde man kan lave fil håndtering  - 
+                                                                            //using lukker for stream'et men her er det writer?.Close() der gør det i stedet for
             try
             {
                 writer = new StreamWriter(FilePathCars, append: true);
@@ -148,7 +148,7 @@ namespace CarAppUpd
 
 
 
-        /*public void SaveTrips()                          // Metode til at gemme en liste af biler i en fil
+        public void SaveTrips()                          // Metode til at gemme en liste af biler i en fil
         {
             using (StreamWriter sw = new StreamWriter(FilePathTrips, true))            // Åbner filen til skrivning
             {
@@ -166,9 +166,9 @@ namespace CarAppUpd
         public List<Trip> LoadTrips()                                 // Metode til at indlæse en liste af medarbejdere fra en fil
         {
            
-
-            
             List<Trip> trips = new List<Trip>();
+            
+            
             string[] lines = File.ReadAllLines(FilePathTrips);
             if (File.Exists(FilePathTrips));
 
@@ -183,11 +183,10 @@ namespace CarAppUpd
                     }
                 }
             }
-
             return trips;                                                    // Returnerer listen af medarbejdere
         }
 
-        */
+        
     }
 
 

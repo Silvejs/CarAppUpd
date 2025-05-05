@@ -23,7 +23,7 @@ namespace CarApp
         private double _distance;
         private bool _isEngineOn;
         private FuelType _fuelType;
-        private List<Trip> _trips;
+        private List<Trip> _tripRegister;
         private GearType _gearType;
         private double _kmPerLiter;
         private double _fuelUsed;
@@ -47,6 +47,7 @@ namespace CarApp
         public GearType GearType { get { return _gearType; } set { _gearType = value; } }
         public string Nummerplade { get { return _nummerplade; } set { _nummerplade = value; } }
         public string Date { get { return _date; } set { _date = value; } }
+        public List<Trip> tripRegister {  get { return _tripRegister; } }
 
 
 
@@ -62,7 +63,7 @@ namespace CarApp
             FuelType = fuelType;
             GearType = gearType;
             Nummerplade = nummerplade;
-            _trips = new List<Trip>();
+            _tripRegister = new List<Trip>();
         }
 
       
@@ -105,7 +106,8 @@ namespace CarApp
                 if (true)
                 {
                     Odometer += (int)newTrip.Distance;
-                    _trips.Add(newTrip);
+                    _tripRegister.Add(newTrip);
+                    
                 }
                 else if (false)
                 {
@@ -135,7 +137,7 @@ namespace CarApp
 
         public List<Trip> PrintAllTrips()
         {
-            return _trips;
+            return _tripRegister;
 
 
 
@@ -157,7 +159,7 @@ namespace CarApp
 
 
 
-            foreach (Trip trip in _trips)                           //foreach loop for at tjekke hver trip om den indeholder datoen
+            foreach (Trip trip in _tripRegister)                           //foreach loop for at tjekke hver trip om den indeholder datoen
             {
                 if (trip.TripDate.ToShortDateString() == date)
                 {

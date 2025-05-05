@@ -170,7 +170,8 @@ namespace CarApp
             foreach (var bil in foundCar)                                           // der skal være tilknyttet nummerplade og ikke indeks - VIRKER DEN???? - SE OM DET VIRKER
             {
 
-                    bil.Drive(køretur);
+                bil.Drive(køretur);
+                CarPark.SaveTrips();
                 
             }
 
@@ -179,7 +180,10 @@ namespace CarApp
 
             Console.WriteLine();
             Console.WriteLine(køretur.HeadPrintTripDetails());
-            Console.WriteLine(køretur.PrintTripDetails());
+            Console.WriteLine($"{køretur.ToString()}");
+         
+
+            //Console.WriteLine(køretur.PrintTripDetails());
 
             Console.WriteLine();
             Console.WriteLine("\nTilbage til hovedmenu...");
@@ -192,17 +196,17 @@ namespace CarApp
 
 
         public void PrintKøretur(DataHandler CarPark)                            //FIKSET??        /*TODO - Find en kåøretur tur som skal printes ud i consolen fx ud fra en dato*/
-                                                                                /* Der skal kunne vælges en bestemt tur i tilfældet at der er flere ture med samme dato*/
+        /* Der skal kunne vælges en bestemt tur i tilfældet at der er flere ture med samme dato*/
         {
             Console.Clear();
             Console.WriteLine("Du har valgt 4.Udskriv køretur oplysninger");
 
             while (true)
-            {   
-                
-                
+            {
 
-                
+
+
+
                 Console.WriteLine("1.Udskiv alle kørerturer for en registreret bil");
                 Console.WriteLine("2.Udskirv køreturer for en registreret bil fra en udvalgt dato");
                 Console.WriteLine("3.Tilbage til hovedmenu");
@@ -217,25 +221,41 @@ namespace CarApp
                         Console.Clear();
                         Console.WriteLine("\nIndtast nummerplade for at se køreturene for en bil: ");
                         string nrplade = Console.ReadLine();
-                        
+
 
                         List<Car> foundCar = bilRegister.Where(p => p.Nummerplade == nrplade).ToList();
                         Console.WriteLine();
 
-                        Console.WriteLine(HeadPrintTripDetails());
                         foreach (var car in foundCar)
                         {
-                            
-                            var trips = car.PrintAllTrips();
-                            foreach (var trip in trips)
-                            { 
-                            Console.WriteLine(trip.PrintTripDetails());
+                            if (CarPark.tripsRegister.Count == 0)
+                            {
+                                Console.WriteLine("\nIngen køreturer er blevet oprettet endnu.");
+                            }
+                            else
+                            {
+                                Console.WriteLine(HeadPrintCarRegister());
+                                for (int i = 0; i < CarPark.tripsRegister.Count; i++)
+                                {
+                                    var trip = CarPark.tripsRegister[i];
+                                    Console.WriteLine($"[{i + 1}] {trip.ToString()}");
+                                }
                             }
 
                         }
+                            /*foreach (var car in foundCar)
+                            {
 
-                        Console.WriteLine("Tilbage...");
-                        break;
+                                var trips = car.PrintAllTrips();
+                                foreach (var trip in trips)
+                                { 
+                                Console.WriteLine(trip.PrintTripDetails());
+                                }
+
+                            }*/
+
+                            Console.WriteLine("Tilbage...");
+                            break;
 
 
 
@@ -244,66 +264,68 @@ namespace CarApp
 
 
                     case "2":
-                        Console.Clear();
-                        Console.WriteLine("\nIndtast nummerplade for at se køreturene på dagen");
-                        string nplade = Console.ReadLine();
-                        
-                        
-                        List<Car> foundCarsTrips = bilRegister.Where(p => p.Nummerplade == nplade).ToList();
-                        Console.WriteLine();
+                                Console.Clear();
+                                Console.WriteLine("\nIndtast nummerplade for at se køreturene på dagen");
+                                string nplade = Console.ReadLine();
+
+
+                                List<Car> foundCarsWithTrips = bilRegister.Where(p => p.Nummerplade == nplade).ToList();
+                                Console.WriteLine();
 
 
 
-                        foreach (var car in foundCarsTrips)
+                                foreach (var car in foundCarsWithTrips)
 
-                        {
-                            
-                            var trips = car.PrintAllTrips();
-                            Console.WriteLine("\nIndtast dato for at se alle køreturer på dagen (ÅÅÅÅ-MM-DD): ");
-                            DateOnly date = DateOnly.Parse(Console.ReadLine(), null);
+                                {
 
-
-                            //string date = Console.ReadLine();
-
-                            //  List<Trip> tripsByDate = trips.Where(p => p.TripDate == date).ToList();
+                                    var trips = car.PrintAllTrips();
+                                    Console.WriteLine("\nIndtast dato for at se alle køreturer på dagen (ÅÅÅÅ-MM-DD): ");
+                                    DateOnly date = DateOnly.Parse(Console.ReadLine(), null);
 
 
+                                    //string date = Console.ReadLine();
+
+                                    //  List<Trip> tripsByDate = trips.Where(p => p.TripDate == date).ToList();
 
 
-                            Console.WriteLine(HeadPrintTripDetails());
-                            foreach (var trip in trips)
-                            {
-                                 if (trip.TripDate.ToShortDateString() == date.ToShortDateString())
+
+
+                                    Console.WriteLine(HeadPrintTripDetails());
+                                    foreach (var trip in trips)
                                     {
-                                        Console.WriteLine(trip.PrintTripDetails());
+                                        if (trip.TripDate.ToShortDateString() == date.ToShortDateString())
+                                        {
+                                            Console.WriteLine(trip.PrintTripDetails());
+                                        }
+
+                                        else if (trip.TripDate.ToShortDateString() != date.ToShortDateString())
+                                        {
+                                            Console.WriteLine("Ingen køreturer fundet den udvalgt dato!");
+                                        }
                                     }
 
-                                 else if (trip.TripDate.ToShortDateString() != date.ToShortDateString())
-                                    {
-                                        Console.WriteLine("Ingen køreturer fundet den udvalgt dato!");
-                                    }
+
+                                }
+
+                                Console.WriteLine("\nTilbage...");
+                                break;
+
+
+
+
+                            case ("3"):
+                                Console.WriteLine("Afvent...");
+                                return;
+
+                            default:
+                                break;
+
                             }
-                            
-                            
-                        }
 
-                        Console.WriteLine("\nTilbage...");
-                        break;
+                        
 
-
-
-
-                     case ("3"):
-                        Console.WriteLine("Afvent...");
-                        return;
-
-                     default:
-                        break;
-
-                }
-
+                
             }
-
         }
 
 
